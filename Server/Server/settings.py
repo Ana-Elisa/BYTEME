@@ -25,7 +25,7 @@ SECRET_KEY = '!%ev78gswds4u+^w+^$7nvebt=i9taq@b8ke)ok%h-id-k)0y^'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['67.205.129.132', '127.0.0.1', 'byteme.online']
+ALLOWED_HOSTS = ['67.205.129.132', '127.0.0.1', 'http://byteme.online/', 'byteme.online', 'www.byteme.online']
 
 
 # Application definition
