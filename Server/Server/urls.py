@@ -28,3 +28,10 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
 ]
+
+# To obtain a security token:
+#   curl -k -H "Content-Type: application/json" -X POST -d '{"username":"[username]","password":"[password]"}' https://byteme.online/auth/token/
+# Returns:
+#   { 'token' : '9944b09199c62bcf9418ad846dd0e4bbdfc6ee4b' }
+# Then make more requests like:
+#   curl -k -H 'Authorization: Token 9944b09199c62bcf9418ad846dd0e4bbdfc6ee4b' -X GET https://byteme.online/auth/user/
