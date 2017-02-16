@@ -27,6 +27,7 @@ urlpatterns = [
     url('^auth/token/', views.obtain_auth_token),
     url(r'^admin/', admin.site.urls),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+    url(r'^', include('website.urls'))
 ]
 
 # To obtain a security token:
