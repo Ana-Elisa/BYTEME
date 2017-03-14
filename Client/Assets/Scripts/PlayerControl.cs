@@ -11,13 +11,16 @@ public class PlayerControl : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		rb = this.GetComponent<Rigidbody2D> ();
-	}
+	}//Start
 	
 	// Update is called once per frame
-	void FixedUpdate () {
-		if (Input.GetAxis ("Horizontal") != 0) {
+	void Update () 
+	{
+		if (Input.GetAxis ("Horizontal") != 0) 
+		{
 			rb.drag = 10;
 		}
+
 		if (Input.GetAxis ("Horizontal") > 0f) {
 			if (rb.velocity.x < maxhspeed) {
 				rb.AddForce (Vector2.right * groundf);
@@ -30,11 +33,7 @@ public class PlayerControl : MonoBehaviour {
 				print ("L");
 			}
 		}
-		if (Input.GetAxis ("Jump") > 0f) {
-			if (rb.velocity.y > -maxhspeed) {
-				rb.AddForce (Vector2.up * groundf);
-				print ("Up");
-			}
-		}
+			
 	}
+
 }
