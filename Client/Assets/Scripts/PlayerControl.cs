@@ -16,7 +16,7 @@ public class PlayerControl : MonoBehaviour {
 	// Update is called once per frame
 	void FixedUpdate () {
 		if (Input.GetAxis ("Horizontal") != 0) {
-			rb.drag
+			rb.drag = 10;
 		}
 		if (Input.GetAxis ("Horizontal") > 0f) {
 			if (rb.velocity.x < maxhspeed) {
