@@ -30,5 +30,11 @@ public class PlayerControl : MonoBehaviour {
 				print ("L");
 			}
 		}
+		if (Input.GetAxis ("Jump") > 0f) {
+			if (rb.velocity.y > -maxhspeed) {
+				rb.AddForce (Vector2.up * groundf);
+				print ("Up");
+			}
+		}
 	}
 }
