@@ -41,7 +41,8 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     'Auth.apps.AuthConfig',
     'website.apps.WebsiteConfig',
-    'KittyKrawler.apps.KittykrawlerConfig'
+    'KittyKrawler.apps.KittykrawlerConfig',
+    'annoying'
 ]
 
 REST_FRAMEWORK = {

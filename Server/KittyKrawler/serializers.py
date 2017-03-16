@@ -1,17 +1,20 @@
 from rest_framework import serializers
-from KittyKrawler.models import Save, Leaderboard, Item
+from KittyKrawler.models import GameSave, Leaderboard, Item
 
 
 class SaveSerializer(serializers.ModelSerializer):
+    user_name = serializers.ReadOnlyField(source='user.username')
+
     class Meta:
-        model = Save
-        fields = ('user', 'attack', 'defence', 'speed', 'health', 'total_health', 'next_level', 'time')
+        model = GameSave
+        fields = ('user_name', 'attack', 'defence', 'speed', 'health', 'total_health', 'next_level', 'time')
+
 
 
 class LeaderboardSerializer(serializers.ModelSerializer):
     class Meta:
         model = Leaderboard
-        fields = ('user', 'save')
+        fields = ('user', 'game_save')
 
 
 class ItemSerializer(serializers.ModelSerializer):
