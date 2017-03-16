@@ -24,7 +24,8 @@ router.register(r'user', UserViewSet)
 
 urlpatterns = [
     url(r'^auth/', include(router.urls)),
-    url('^auth/token/', views.obtain_auth_token),
+    url(r'^auth/token/', views.obtain_auth_token),
+    url(r'^kittykrawler/', include('KittyKrawler.urls')),
     url(r'^admin/', admin.site.urls),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     url(r'^', include('website.urls'))

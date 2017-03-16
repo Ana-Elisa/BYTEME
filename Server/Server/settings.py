@@ -39,8 +39,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'rest_framework.authtoken',
-    'Auth',
-    'website'
+    'Auth.apps.AuthConfig',
+    'website.apps.WebsiteConfig',
+    'KittyKrawler.apps.KittykrawlerConfig'
 ]
 
 REST_FRAMEWORK = {
