@@ -9,6 +9,8 @@ using UnityEngine.EventSystems;
 
 public class SwitchScenes : MonoBehaviour {
     private Button enterGameButton;
+    private Button forgotPasswordButton;
+    private Button newUserButton;
 
 	// Use this for initialization
 	void Start () {
@@ -37,16 +39,41 @@ public class SwitchScenes : MonoBehaviour {
     private void setupScene(Scene scene, LoadSceneMode mode)
     {
 
-        if (scene.name == "LoginScreen") {
+        if (scene.name == "LoginScreen")
+        {
             //setup buttons
             enterGameButton = GameObject.Find("EnterGameButton").GetComponent<Button>();
+            forgotPasswordButton = GameObject.Find("ForgotPasswordButton").GetComponent<Button>();
+            newUserButton = GameObject.Find("NewUserButton").GetComponent<Button>();
+            //if enter game button clicked go to game scene
             enterGameButton.onClick.AddListener(loadGame);
+            //forgot password button clicked -> forgotpasswordScreen
+            forgotPasswordButton.onClick.AddListener(loadForgotPasswordScreen);
+            //new User clicked -> new User screen
+            newUserButton.onClick.AddListener(loadNewUserScreen);
+
+
         }
+      /*  else if (scene.name == "ForgotPasswordScreen")
+        {
+
+
+        }
+        else if (scene.name == "NewUserScreen") {
+
+        }
+        */
     }
 
     private void loadGame()
     {
         SceneManager.LoadScene("Test");
+    }
+    private void loadForgotPasswordScreen() {
+        SceneManager.LoadScene("ForgotPasswordScreen");
+    }
+    private void loadNewUserScreen() {
+        SceneManager.LoadScene("NewUserScreen");
     }
 
     
