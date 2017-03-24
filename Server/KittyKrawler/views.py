@@ -22,7 +22,5 @@ class SaveView(viewsets.ModelViewSet):
         leaderboard_entry = Leaderboard(user=self.request.user, game_save=game_save)
         leaderboard_entry.save()
 
-        items = serializer.item_list()
-
     def get_queryset(self):
         return GameSave.objects.filter(user=self.request.user, current=True)
