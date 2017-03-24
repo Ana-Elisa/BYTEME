@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class FellOff : MonoBehaviour {
 
 	Rigidbody2D player;
