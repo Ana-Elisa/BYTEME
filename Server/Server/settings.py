@@ -42,7 +42,7 @@ INSTALLED_APPS = [
     'Auth.apps.AuthConfig',
     'website.apps.WebsiteConfig',
     'KittyKrawler.apps.KittykrawlerConfig',
-    'annoying'
+    'jchart'
 ]
 
 REST_FRAMEWORK = {
