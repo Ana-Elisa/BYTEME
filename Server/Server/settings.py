@@ -39,14 +39,16 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'rest_framework.authtoken',
-    'Auth',
-    'website'
+    'Auth.apps.AuthConfig',
+    'website.apps.WebsiteConfig',
+    'KittyKrawler.apps.KittykrawlerConfig',
+    'jchart'
 ]
 
 REST_FRAMEWORK = {
-    'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.IsAuthenticatedOrReadOnly',
-    ],
+#    'DEFAULT_PERMISSION_CLASSES': [
+#        'rest_framework.permissions.IsAuthenticatedOrReadOnly',
+#    ],
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework.authentication.TokenAuthentication',
         'rest_framework.authentication.SessionAuthentication',
@@ -131,7 +133,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'America/New_York'
 
 USE_I18N = True
 

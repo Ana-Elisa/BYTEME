@@ -27,7 +27,7 @@ sysinfo.txt
 *.apk
 *.unitypackage
 
-*.cpython
 *.pyc
 Server/.idea/
 *.idea*
+.idea/

@@ -17,14 +17,21 @@ from django.conf.urls import url, include
 from django.contrib import admin
 from rest_framework import routers
 from rest_framework.authtoken import views
-from Auth.views import UserViewSet
+
+from Auth.views import UserViewSet, ObtainAuthToken
+from KittyKrawler.views import SaveView
+
 
 router = routers.DefaultRouter()
 router.register(r'user', UserViewSet)
+router.register(r'save', SaveView)
+router.register(r'token', ObtainAuthToken, base_name='token')
 
 urlpatterns = [
-    url(r'^auth/', include(router.urls)),
-    url('^auth/token/', views.obtain_auth_token),
+    url(r'^api/', include(router.urls)),
+#    url(r'^api/token/', views.obtain_auth_token),
+#    url(r'^kittykrawler/', include('KittyKrawler.urls')),
+#    url(r'^kittykrawler/', include(router2.urls)),
     url(r'^admin/', admin.site.urls),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     url(r'^', include('website.urls'))
