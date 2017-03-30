@@ -18,6 +18,10 @@ public class SwitchScenes : MonoBehaviour {
     private String username;
     private String password;
     private String email;
+    private Button registerButton;
+
+   
+
 
 	// Use this for initialization
 	void Start () {
@@ -59,12 +63,12 @@ public class SwitchScenes : MonoBehaviour {
             //after user is done editing input, 
             usernameInputField.onEndEdit.AddListener(delegate { UpdateUserName(usernameInputField.text); });
             passwordInputField.onEndEdit.AddListener(delegate { UpdatePassword(passwordInputField.text); });
-            
+
 
 
 
             //if enter game button clicked go to game scene
-            
+
             enterGameButton.onClick.AddListener(loadGame);
             //forgot password button clicked -> forgotpasswordScreen
             forgotPasswordButton.onClick.AddListener(loadForgotPasswordScreen);
@@ -73,7 +77,7 @@ public class SwitchScenes : MonoBehaviour {
 
 
         }
-       else if (scene.name == "ForgotPasswordScreen")
+        else if (scene.name == "ForgotPasswordScreen")
         {
             //setup button
             submitButton = GameObject.Find("SubmitButton").GetComponent<Button>();
@@ -84,11 +88,22 @@ public class SwitchScenes : MonoBehaviour {
             submitButton.onClick.AddListener(loadLoginScreen);
 
 
-        }/*
-        else if (scene.name == "NewUserScreen") {
-
         }
-        */
+        else if (scene.name == "NewUserScreen") {
+            registerButton = GameObject.Find("Register").GetComponent<Button>();
+            passwordInputField = GameObject.Find("PasswordInputField").GetComponent<InputField>();
+            passwordInputField.onEndEdit.AddListener(delegate { UpdatePassword(passwordInputField.text); });
+            usernameInputField = GameObject.Find("UsernameInputField").GetComponent<InputField>();
+            usernameInputField.onEndEdit.AddListener(delegate { UpdateUserName(usernameInputField.text); });
+            //could make these into call methods..
+            emailInputField = GameObject.Find("EmailInputField").GetComponent<InputField>();
+            emailInputField.onEndEdit.AddListener(delegate { UpdateEmail(emailInputField.text); });
+
+
+            //SUBMIT POST/GET METHOD HERE>
+            registerButton.onClick.AddListener(loadLoginScreen);
+        }
+        
     }
     private void UpdateEmail(string arg0) {
         email = arg0;
@@ -97,6 +112,7 @@ public class SwitchScenes : MonoBehaviour {
     private void UpdatePassword(string arg0) {
         password = arg0;
         Debug.Log(arg0);
+        
     }
     private void UpdateUserName(string arg0) {
         username = arg0;
