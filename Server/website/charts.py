@@ -1,6 +1,7 @@
 from jchart import Chart
 from jchart.config import rgba, DataSet, Axes
-from KittyKrawler.models import GameSave
+from KittyKrawler.models import GameSave, Item
+from django.db.models import Max
 
 
 class AvgTimePerLevelBar(Chart):
@@ -21,7 +22,7 @@ class AvgTimePerLevelBar(Chart):
             level0_time = 0
             for level_data in level0_data:
                 level0_time += (level_data.time.days * 25 + level_data.time.seconds/3600)
-            data.append(level0_time/len(level0_data))
+            data.append(round(level0_time/len(level0_data), 2))
         else:
             data.append(0)
 
@@ -29,7 +30,7 @@ class AvgTimePerLevelBar(Chart):
             level1_time = 0
             for level_data in level1_data:
                 level1_time += (level_data.time.days * 25 + level_data.time.seconds/3600)
-            data.append(level1_time/len(level1_data))
+            data.append(round(level1_time/len(level1_data), 2))
         else:
             data.append(0)
 
@@ -37,7 +38,7 @@ class AvgTimePerLevelBar(Chart):
             level2_time = 0
             for level_data in level2_data:
                 level2_time += (level_data.time.days * 25 + level_data.time.seconds/3600)
-            data.append(level2_time/len(level2_data))
+            data.append(round(level2_time/len(level2_data), 2))
         else:
             data.append(0)
 
@@ -45,7 +46,7 @@ class AvgTimePerLevelBar(Chart):
             level3_time = 0
             for level_data in level3_data:
                 level3_time += (level_data.time.days * 25 + level_data.time.seconds/3600)
-            data.append(level3_time/len(level3_data))
+            data.append(round(level3_time/len(level3_data), 2))
         else:
             data.append(0)
 
@@ -86,4 +87,28 @@ class TimeSpentvsLevel(Chart):
             data=data,
             showLine=False,
             color=(56, 163, 235),
+        )]
+
+
+class PieChartItemsFound(Chart):
+    chart_type = 'pie'
+
+    def get_labels(self, *args, **kwargs):
+        item_list = list(Item.objects.all().order_by('item_id'))
+        return [item.item_id for item in item_list]
+
+    def get_datasets(self, *args, **kwargs):
+        max = Item.objects.all().aggregate(Max('item_id'))['item_id__max'] + 1
+        data = [0 for i in range(0, max)]
+        game_data = GameSave.objects.all()
+
+        for save in game_data:
+            for item in save.save_items.all():
+                data[int(item.item_id)] += 1
+
+        data = [item for item in data if item != 0]
+
+        return [DataSet(
+            label='Number of times each item has been found',
+            data=data
         )]
