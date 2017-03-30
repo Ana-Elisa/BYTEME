@@ -4,9 +4,6 @@
 
 {% block branding %}
 <h1 id="site-name">
-    <div class="image fit">
-        <a href="generic.html" class="link"><img src="../../static/website/images/logo.png" width = "25%" alt="" /></a>
-    </div>
     <a href="{% url 'admin:index' %}">{{ site_header|default:_('BYTEME administration') }}</a></h1>
 {% endblock %}
 
