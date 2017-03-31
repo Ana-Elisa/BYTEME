@@ -91,23 +91,23 @@ WSGI_APPLICATION = 'Server.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.10/ref/settings/#databases
 
-#DATABASES = {
-#    'default': {
-#        'ENGINE': 'django.db.backends.sqlite3',
-#        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-#    }
-#}
-
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'BYTEME_Server',
-        'USER': 'byteme',
-        'PASSWORD': 'byte1234ME!',
-        'HOST': 'localhost',
-        'PORT': '',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
+
+#DATABASES = {
+#    'default': {
+#        'ENGINE': 'django.db.backends.mysql',
+#        'NAME': 'BYTEME_Server',
+#        'USER': 'byteme',
+#        'PASSWORD': 'byte1234ME!',
+#        'HOST': 'localhost',
+#        'PORT': '',
+#    }
+#}
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
