@@ -77,7 +77,7 @@ public class SwitchScenes : MonoBehaviour {
 
 
         }
-        else if (scene.name == "ForgotPasswordScreen")
+       /* else if (scene.name == "ForgotPasswordScreen")
         {
             //setup button
             submitButton = GameObject.Find("SubmitButton").GetComponent<Button>();
@@ -88,7 +88,7 @@ public class SwitchScenes : MonoBehaviour {
             submitButton.onClick.AddListener(loadLoginScreen);
 
 
-        }
+        }*/
         else if (scene.name == "NewUserScreen") {
             registerButton = GameObject.Find("Register").GetComponent<Button>();
             passwordInputField = GameObject.Find("PasswordInputField").GetComponent<InputField>();
@@ -128,7 +128,8 @@ public class SwitchScenes : MonoBehaviour {
        
     }
     private void loadForgotPasswordScreen() {
-        SceneManager.LoadScene("ForgotPasswordScreen");
+		Application.OpenURL ("https://byteme.online/password_reset/");
+        //SceneManager.LoadScene("ForgotPasswordScreen");
     }
     private void loadNewUserScreen() {
         SceneManager.LoadScene("NewUserScreen");
