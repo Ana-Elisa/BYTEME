@@ -5,6 +5,8 @@ using UnityEngine;
 using UnityEngine.SceneManagement;//able to use load scene function
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using UnityEngine.Networking;
+
 
 
 public class SwitchScenes : MonoBehaviour {
@@ -19,12 +21,15 @@ public class SwitchScenes : MonoBehaviour {
     private String password;
     private String email;
     private Button registerButton;
-
+	private string token; 
    
-
+	string url;
+	private IEnumerator coroutine;
 
 	// Use this for initialization
 	void Start () {
+		url = "https://byteme.online/api/token/";
+
         UnityEngine.Object.DontDestroyOnLoad(this);
        
     }
@@ -51,44 +56,35 @@ public class SwitchScenes : MonoBehaviour {
     private void setupScene(Scene scene, LoadSceneMode mode)
     {
 
-        if (scene.name == "LoginScreen")
-        {
-            //setup buttons
-            enterGameButton = GameObject.Find("EnterGameButton").GetComponent<Button>();
-            forgotPasswordButton = GameObject.Find("ForgotPasswordButton").GetComponent<Button>();
-            newUserButton = GameObject.Find("NewUserButton").GetComponent<Button>();
-            //setup input fields
-            usernameInputField = GameObject.Find("UsernameInputField").GetComponent<InputField>();
-            passwordInputField = GameObject.Find("PasswordInputField").GetComponent<InputField>();
-            //after user is done editing input, 
-            usernameInputField.onEndEdit.AddListener(delegate { UpdateUserName(usernameInputField.text); });
-            passwordInputField.onEndEdit.AddListener(delegate { UpdatePassword(passwordInputField.text); });
+		if (scene.name == "LoginScreen") {
+			//setup buttons
+			enterGameButton = GameObject.Find ("EnterGameButton").GetComponent<Button> ();
+			forgotPasswordButton = GameObject.Find ("ForgotPasswordButton").GetComponent<Button> ();
+			newUserButton = GameObject.Find ("NewUserButton").GetComponent<Button> ();
+			//setup input fields
+			usernameInputField = GameObject.Find ("UsernameInputField").GetComponent<InputField> ();
+			passwordInputField = GameObject.Find ("PasswordInputField").GetComponent<InputField> ();
+			//after user is done editing input, 
+			usernameInputField.onEndEdit.AddListener (delegate {
+				UpdateUserName (usernameInputField.text);
+			});
+			passwordInputField.onEndEdit.AddListener (delegate {
+				UpdatePassword (passwordInputField.text);
+			});
 
 
 
 
-            //if enter game button clicked go to game scene
+			//if enter game button clicked go to game scene
 
-            enterGameButton.onClick.AddListener(loadGame);
-            //forgot password button clicked -> forgotpasswordScreen
-            forgotPasswordButton.onClick.AddListener(loadForgotPasswordScreen);
-            //new User clicked -> new User screen
-            newUserButton.onClick.AddListener(loadNewUserScreen);
-
-
-        }
-       /* else if (scene.name == "ForgotPasswordScreen")
-        {
-            //setup button
-            submitButton = GameObject.Find("SubmitButton").GetComponent<Button>();
-            emailInputField = GameObject.Find("EmailInputField").GetComponent<InputField>();
-            emailInputField.onEndEdit.AddListener(delegate { UpdateEmail(emailInputField.text); });
-            //if submit clicked return to login screen. 
-            //This is also where a post method will be sent to server
-            submitButton.onClick.AddListener(loadLoginScreen);
+			enterGameButton.onClick.AddListener (loadGame);
+			//forgot password button clicked -> forgotpasswordScreen
+			forgotPasswordButton.onClick.AddListener (loadForgotPasswordScreen);
+			//new User clicked -> new User screen
+			newUserButton.onClick.AddListener (loadNewUserScreen);
 
 
-        }*/
+		}
         else if (scene.name == "NewUserScreen") {
             registerButton = GameObject.Find("Register").GetComponent<Button>();
             passwordInputField = GameObject.Find("PasswordInputField").GetComponent<InputField>();
@@ -122,11 +118,47 @@ public class SwitchScenes : MonoBehaviour {
     private void loadGame()
     {
         //Here is where we would validate username and password, GEt/Post 
+		WWWForm loginInfo = new WWWForm();
+		loginInfo.AddField ("username", username);
+		loginInfo.AddField ("password", password);
+
+		var header = loginInfo.headers;
+		header ["content-type"] = "application/json";
         //method to service 
-        SceneManager.LoadScene("Test");
+
+		UnityWebRequest www = UnityWebRequest.Post (url, loginInfo);
+		
+		//WWW www = new WWW(url, loginInfo.data);
+
+		coroutine = LoginToGame (www);
+		StartCoroutine(coroutine);
+		/*if (token != null) {
+			
+		}*/
+		SceneManager.LoadScene("Test");
+	
       
        
     }
+
+	IEnumerator LoginToGame(UnityWebRequest www){
+		
+		yield return www.Send();
+
+		if (www.isDone) {
+			Debug.Log (www.downloadHandler.text);
+			JSONObject j = new JSONObject (www.downloadHandler.text);
+			accessData (j);
+
+		} else {
+			Debug.Log (www.error);
+		}
+		
+	}
+	void accessData(JSONObject obj){
+		token = obj.GetField ("token").ToString();
+	
+	}
     private void loadForgotPasswordScreen() {
 		Application.OpenURL ("https://byteme.online/password_reset/");
         //SceneManager.LoadScene("ForgotPasswordScreen");
