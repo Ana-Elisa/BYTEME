@@ -25,3 +25,8 @@ class LeaderboardAdmin(admin.ModelAdmin):
 admin.site.register(GameSave, GameSaveAdmin)
 admin.site.register(Leaderboard, LeaderboardAdmin)
 admin.site.register(Item)
+
+
+#admin.site.site_header = 'BYTEME Administration'
+#admin.site.site_title = 'BYTEME Admin'
+#admin.site.index_title = 'BYTEME Admin'
