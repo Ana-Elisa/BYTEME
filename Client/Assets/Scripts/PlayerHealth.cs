@@ -7,9 +7,13 @@ public class PlayerHealth : MonoBehaviour {
 
 	public int startingHealth = 100;
 	public int currentHealth;
-	public SliderJoint2D healthSlider;
+	public int damage = 10;
+	public Slider healthSlider;
 	bool isDead;
 	bool damaged;
+
+	PlayerControl move;
+	GameObject player;
 
 
 	// Use this for initialization
@@ -20,5 +24,42 @@ public class PlayerHealth : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		
+	}
+
+	void OnCollisionEnter2D(Collision2D other)
+	{
+		if (other.gameObject.tag == "Enemy") {
+			TakeDamage (20);
+		}
+	}
+
+	public void TakeDamage(int amount){
+
+		damaged = true;
+
+		currentHealth -= amount;
+
+		healthSlider.value = currentHealth;
+
+		if (currentHealth <= 0 ) 
+		{
+			Death ();
+		}
+
+	}
+
+	public void Death(){
+		isDead = true;
+		print ("DEAD ggez");
+		//move.enabled = false;
+		//Im going to worry about this later because i'm tilted
+		//FreezeCam ();
+	}
+		
+	IEnumerator FreezeCam(){
+
+		Camera.main.clearFlags = CameraClearFlags.Nothing;
+		yield return null;
+		Camera.main.cullingMask = 0;
 	}
 }
