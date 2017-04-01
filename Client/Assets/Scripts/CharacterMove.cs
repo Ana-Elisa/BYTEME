@@ -6,7 +6,7 @@ public class CharacterMove : MonoBehaviour {
 
 	float speed = .05f;
 	float jump = 15f;
-	bool grounded;
+	bool inMotion;
 	Vector3 lastDir;
 
 	Animator anim;
@@ -17,24 +17,36 @@ public class CharacterMove : MonoBehaviour {
 	{
 		lastDir = new Vector3 (1, 0, 0);
 		character = GameObject.Find ("cat");
+		inMotion = false;
 		anim = GetComponent<Animator> ();
+		anim.SetBool ("Walking", true);
+		anim.SetBool ("Grounded", true);
 	}
 
 	// Update is called once per frame
 	void Update () 
 	{
-		anim.SetInteger ("Status", 0);
+		
 		float horizontal = Input.GetAxis ("Horizontal");
 
 		var move = new Vector3 (horizontal, 0, 0);
 	
-		if (horizontal != 0) 
-		{
-			if (anim.GetInteger ("Status") != 1) 
+		if (horizontal != 0) {
+			if (!inMotion) 
 			{
-				anim.SetInteger ("Status", 1);	
+				anim.SetBool("Walking", true);
+				inMotion = true;
 			}
 			lastDir = move;
+
+		} 
+		else 
+		{
+			if (inMotion) 
+			{
+				anim.SetBool ("Walking", false);
+				inMotion = false;
+			}
 		}
 
 		transform.rotation = Quaternion.LookRotation (lastDir);	
