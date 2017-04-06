@@ -20,7 +20,7 @@ public class PlayerControl : MonoBehaviour {
 	{
 		if (Input.GetAxis ("Horizontal") != 0) 
 		{
-			rb.drag = 10;
+			rb.drag = 1;
 		}
 
 		if (Input.GetAxis ("Horizontal") > 0f) {

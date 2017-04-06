@@ -135,7 +135,9 @@ public class SwitchScenes : MonoBehaviour {
 		/*if (token != null) {
 			
 		}*/
-		SceneManager.LoadScene("Test");
+
+		//THIS IS WHAT I CHANGED
+		SceneManager.LoadScene("PlayerHealth");
 	
       
        

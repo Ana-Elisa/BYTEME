@@ -51,6 +51,8 @@ public class PlayerHealth : MonoBehaviour {
 	public void Death(){
 		isDead = true;
 		print ("DEAD ggez");
+
+
 		//move.enabled = false;
 		//Im going to worry about this later because i'm tilted
 		//FreezeCam ();
