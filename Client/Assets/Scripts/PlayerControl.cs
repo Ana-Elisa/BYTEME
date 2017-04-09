@@ -20,26 +20,26 @@ public class PlayerControl : MonoBehaviour {
 	{
 		if (Input.GetAxis ("Horizontal") != 0) 
 		{
-			rb.drag = 1;
+			rb.drag = 15;
 		}
 
 		if (Input.GetAxis ("Horizontal") > 0f) {
 			if (rb.velocity.x < maxhspeed) {
 				rb.AddForce (Vector2.right * groundf);
-				print ("R");
+				//print ("R");
 			}
 		}
 		if (Input.GetAxis ("Horizontal") < 0f) {
 			if (rb.velocity.x > -maxhspeed) {
 				rb.AddForce (Vector2.left * groundf);
-				print ("L");
+				//print ("L");
 			}
 		}
-		if (Input.GetKeyDown(KeyCode.Space)) {
+		if (Input.GetKeyDown(KeyCode.UpArrow)) {
 			if (canJump) {
 				canJump = false;
 				GetComponent<Rigidbody2D>().AddForce (this.gameObject.transform.up * jumpForce);
-				print ("Up");
+				//print ("Up");
 			}
 		}
 			
@@ -49,7 +49,7 @@ public class PlayerControl : MonoBehaviour {
 		//DEBUGGING: print ("Collided");
 		if (collidingObject.gameObject.tag == "Stage") {
 			canJump = true;
-			print ("can jump");
+			//print ("can jump");
 		}
 	}
 
