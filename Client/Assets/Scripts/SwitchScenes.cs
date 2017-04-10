@@ -19,9 +19,9 @@ public class SwitchScenes : MonoBehaviour {
     private InputField usernameInputField;
     private InputField passwordInputField;
     private InputField emailInputField;
-    private String username;
-    private String password;
-    private String email;
+    private String username = "";
+    private String password = "";
+    private String email = "";
     private Button registerButton;
 	private string token; 
    
@@ -123,7 +123,6 @@ public class SwitchScenes : MonoBehaviour {
 		if (status == true)
 			SceneManager.LoadScene ("PlayerHealth");
 		else {
-			print ("cant login");
 			showPopup = true;
 		}
 
@@ -133,7 +132,11 @@ public class SwitchScenes : MonoBehaviour {
 	{
 		if (showPopup)
 		{
-			GUI.Window(0, new Rect((Screen.width/2)-150, (Screen.height/2)-75, 300, 250), ShowGUI, "Invalid");
+			GUI.color = new Color(1,1,1,100f);
+			GUI.Window(0, new Rect((Screen.width/2)-150, (Screen.height/2)-75, 300, 250), ShowGUI, "Error");
+			GUI.Window(0, new Rect((Screen.width/2)-150, (Screen.height/2)-75, 300, 250), ShowGUI, "Error");
+			GUI.Window(0, new Rect((Screen.width/2)-150, (Screen.height/2)-75, 300, 250), ShowGUI, "Error");
+			GUI.Window(0, new Rect((Screen.width/2)-150, (Screen.height/2)-75, 300, 250), ShowGUI, "Error");
 
 		}
 	}
