@@ -9,6 +9,7 @@ public class PlayerControl : MonoBehaviour {
 	public float groundf = 1f;
 	bool canJump = true;
 	public float jumpForce = 700;
+	public bool grounded;
 
 	// Use this for initialization
 	void Start () {
@@ -27,6 +28,8 @@ public class PlayerControl : MonoBehaviour {
 			if (rb.velocity.x < maxhspeed) {
 				rb.AddForce (Vector2.right * groundf);
 				print ("R");
+				 
+
 			}
 		}
 		if (Input.GetAxis ("Horizontal") < 0f) {
@@ -35,7 +38,7 @@ public class PlayerControl : MonoBehaviour {
 				print ("L");
 			}
 		}
-		if (Input.GetKeyDown(KeyCode.Space)) {
+		if (Input.GetKeyDown(KeyCode.UpArrow)) {
 			if (canJump) {
 				canJump = false;
 				GetComponent<Rigidbody2D>().AddForce (this.gameObject.transform.up * jumpForce);
@@ -51,6 +54,9 @@ public class PlayerControl : MonoBehaviour {
 			canJump = true;
 			print ("can jump");
 		}
+	}
+	void FixedUpdate(){
+		
 	}
 
 }
