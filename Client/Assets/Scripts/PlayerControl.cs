@@ -29,13 +29,9 @@ public class PlayerControl : MonoBehaviour {
 		if (Input.GetAxis ("Horizontal") > 0f) {
 			if (rb.velocity.x < maxhspeed) {
 				rb.AddForce (Vector2.right * groundf);
-<<<<<<< HEAD
-				print ("R");
-				 
 
-=======
 				//print ("R");
->>>>>>> master
+
 			}
 		}
 		if (Input.GetAxis ("Horizontal") < 0f) {
@@ -61,9 +57,5 @@ public class PlayerControl : MonoBehaviour {
 			//print ("can jump");
 		}
 	}
-	/*void FixedUpdate(){
-		float h = Input.GetAxis("Horizontal");
-		rb.AddForce ((Vector2.right * speed) * h);
-	}*/
-
+	
 }
