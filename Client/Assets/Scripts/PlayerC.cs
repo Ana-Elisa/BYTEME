@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerC : MonoBehaviour {
 	public float speed = 50f;
     public float maxSpeed = 3; 
-	public float jumpPower = 150f;
+	public int jumpPower = 150;
 	public bool grounded;
 	private Rigidbody2D rb2d;
     private Animator anim;
@@ -32,6 +32,11 @@ public class PlayerC : MonoBehaviour {
             transform.localScale = new Vector3(1, 1, 1);
         }
 
+
+           //JUMPING can only jump if on ground
+           if(Input.GetButtonDown("Jump") && grounded){
+            rb2d.AddForce(Vector2.up * jumpPower);
+            }
 
     }
     void FixedUpdate(){
