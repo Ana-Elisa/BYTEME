@@ -10,6 +10,8 @@ using UnityEngine.Networking;
 
 
 public class SwitchScenes : MonoBehaviour {
+	private APIActions api = new APIActions();
+
     private Button enterGameButton;
     private Button forgotPasswordButton;
     private Button newUserButton;
@@ -23,13 +25,11 @@ public class SwitchScenes : MonoBehaviour {
     private Button registerButton;
 	private string token; 
    
-	string url;
-	private IEnumerator coroutine;
+	private bool showPopup = false;
+	string popupText = "";
 
 	// Use this for initialization
 	void Start () {
-		url = "https://byteme.online/api/token/";
-
         UnityEngine.Object.DontDestroyOnLoad(this);
        
     }
@@ -115,48 +115,45 @@ public class SwitchScenes : MonoBehaviour {
         Debug.Log(arg0);
     }
 
-    private void loadGame()
-    {
-        //Here is where we would validate username and password, GEt/Post 
-		WWWForm loginInfo = new WWWForm();
-		loginInfo.AddField ("username", username);
-		loginInfo.AddField ("password", password);
+    private void loadGame() {
+		ReturnObject result = api.login(username, password);
+		bool status = result.retStatus;
+		popupText = result.text;
 
-		var header = loginInfo.headers;
-		header ["content-type"] = "application/json";
-        //method to service 
-
-		UnityWebRequest www = UnityWebRequest.Post (url, loginInfo);
-		
-		//WWW www = new WWW(url, loginInfo.data);
-
-		coroutine = LoginToGame (www);
-		StartCoroutine(coroutine);
-		/*if (token != null) {
-			
-		}*/
-
-		//THIS IS WHAT I CHANGED
-		SceneManager.LoadScene("PlayerHealth");
-	
-      
-       
-    }
-
-	IEnumerator LoginToGame(UnityWebRequest www){
-		
-		yield return www.Send();
-
-		if (www.isDone) {
-			Debug.Log (www.downloadHandler.text);
-			JSONObject j = new JSONObject (www.downloadHandler.text);
-			accessData (j);
-
-		} else {
-			Debug.Log (www.error);
+		if (status == true)
+			SceneManager.LoadScene ("PlayerHealth");
+		else {
+			print ("cant login");
+			showPopup = true;
 		}
+
+    }
 		
+	void OnGUI()
+	{
+		if (showPopup)
+		{
+			GUI.Window(0, new Rect((Screen.width/2)-150, (Screen.height/2)-75, 300, 250), ShowGUI, "Invalid");
+
+		}
 	}
+
+	void ShowGUI(int windowID)
+	{
+		// You may put a label to show a message to the player
+
+		GUI.Label(new Rect(65, 40, 200, 200), popupText);
+
+		// You may put a button to close the pop up too
+
+		if (GUI.Button(new Rect(50, 150, 75, 30), "OK"))
+		{
+			showPopup = false;
+			// you may put other code to run according to your game too
+		}
+
+	}
+
 	void accessData(JSONObject obj){
 		token = obj.GetField ("token").ToString();
 	
