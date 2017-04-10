@@ -11,6 +11,8 @@ public class PickItem : MonoBehaviour {
 		
 	}
 
+	//Write a getter method
+
 	void OnCollisionEnter2D (Collision2D col){
 		
 		if (col.gameObject.tag == "Player") {
@@ -44,6 +46,13 @@ public class PickItem : MonoBehaviour {
 				Destroy (gameObject);
 				playerItems.Add (3);
 			}
+			if (gameObject.name == "TunaCan")
+			{
+				print ("TunaCan Collided");
+				Destroy (gameObject);
+				playerItems.Add (4);
+			}
+				
 
 			//PRINTING FOR DEBUGGING
 			foreach (int item in playerItems) {
