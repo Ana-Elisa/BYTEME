@@ -22,12 +22,14 @@ public class PlayerAttack : MonoBehaviour {
 		}
 		if (attacking) {
 			if (attackTimer > 0) {
-				attackTimer -= attackTimer-Time.deltaTime;
+
+				attackTimer -= Time.deltaTime;
 			} else {
+
 				attacking = false;
 				attackTrigger.enabled = false;
 			}
 		}
-		anim.SetBool ("attacking", attacking);
+		anim.SetBool ("Attacking", attacking);
 	}
 }

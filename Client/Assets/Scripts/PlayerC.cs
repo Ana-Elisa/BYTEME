@@ -34,7 +34,7 @@ public class PlayerC : MonoBehaviour {
 
 
            //JUMPING can only jump if on ground
-           if(Input.GetButtonDown("Jump") && grounded){
+           if(Input.GetKeyDown(KeyCode.UpArrow) && grounded){
             rb2d.AddForce(Vector2.up * jumpPower);
             }
 
