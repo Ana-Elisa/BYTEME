@@ -52,7 +52,9 @@ public class PlayerHealth : MonoBehaviour {
 		isDead = true;
 		print ("DEAD ggez");
 
+		//Screen.lockCursor = true;
 
+		GameObject.Find("Player").GetComponent<PlayerControl> ().enabled = false;
 		//move.enabled = false;
 		//Im going to worry about this later because i'm tilted
 		//FreezeCam ();
