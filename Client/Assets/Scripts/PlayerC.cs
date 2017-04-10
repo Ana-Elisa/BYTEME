@@ -22,9 +22,19 @@ public class PlayerC : MonoBehaviour {
 
         anim.SetBool("Grounded",grounded);
         anim.SetFloat("Speed", Mathf.Abs(Input.GetAxis("Horizontal")));
-		
-	}
-	void FixedUpdate(){
+
+        //flip sprite
+        if (Input.GetAxis("Horizontal") < -0.1f) {
+            transform.localScale = new Vector3(-1, 1, 1);
+        }
+        if (Input.GetAxis("Horizontal") > 0.1f)
+        {
+            transform.localScale = new Vector3(1, 1, 1);
+        }
+
+
+    }
+    void FixedUpdate(){
 		float h = Input.GetAxis("Horizontal");
        //moves player L R
         rb2d.AddForce((Vector2.right * speed) * h);
