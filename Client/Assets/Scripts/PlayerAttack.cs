@@ -18,12 +18,11 @@ public class PlayerAttack : MonoBehaviour {
 		if (Input.GetKeyDown(KeyCode.Space) && !attacking) {
 			attacking = true;
 			attackTimer = attackCoolDown;
-
 			attackTrigger.enabled = true;
 		}
 		if (attacking) {
 			if (attackTimer > 0) {
-				attackTimer -= attackTimer - Time.deltaTime;
+				attackTimer -= attackTimer-Time.deltaTime;
 			} else {
 				attacking = false;
 				attackTrigger.enabled = false;

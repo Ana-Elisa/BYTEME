@@ -6,11 +6,11 @@ public class PlayerC : MonoBehaviour {
 	public float speed = 50f;
 	public float jumpPower = 150f;
 	public bool grounded;
-	 Rigidbody2D rigidBody2D;
+	Rigidbody2D rigidBody2D;
 
 	// Use this for initialization
 	void Start () {
-		rigidBody2D = gameObject.GetComponent<Rigidbody2D>();	
+		rigidBody2D = this.GetComponent<Rigidbody2D>();	
 	}
 	
 	// Update is called once per frame
@@ -19,6 +19,6 @@ public class PlayerC : MonoBehaviour {
 	}
 	void FixedUpdate(){
 		float h = Input.GetAxis("Horizontal");
-		//rigidbody2D.AddForce((Vector2.right * speed)* h);
+		rigidBody2D.AddForce ((Vector2.right * speed) * h);
 	}
 }
