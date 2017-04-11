@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerControl : MonoBehaviour {
-
+	public float speed = 10f;
+	public float jumpPower = 150f;
 	Rigidbody2D rb;
 	public float maxhspeed = 2f;
 	public float groundf = 1f;
 	bool canJump = true;
 	public float jumpForce = 700;
+	public bool grounded;
 
 	// Use this for initialization
 	void Start () {
@@ -17,7 +19,8 @@ public class PlayerControl : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () 
-	{
+	{	float h = Input.GetAxis("Horizontal");
+		rb.AddForce ((Vector2.right * speed) * h);
 		if (Input.GetAxis ("Horizontal") != 0) 
 		{
 			rb.drag = 15;
@@ -26,7 +29,9 @@ public class PlayerControl : MonoBehaviour {
 		if (Input.GetAxis ("Horizontal") > 0f) {
 			if (rb.velocity.x < maxhspeed) {
 				rb.AddForce (Vector2.right * groundf);
+
 				//print ("R");
+
 			}
 		}
 		if (Input.GetAxis ("Horizontal") < 0f) {
@@ -52,5 +57,5 @@ public class PlayerControl : MonoBehaviour {
 			//print ("can jump");
 		}
 	}
-
+	
 }
