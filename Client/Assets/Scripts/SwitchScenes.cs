@@ -116,7 +116,8 @@ public class SwitchScenes : MonoBehaviour {
     }
 
     private void loadGame() {
-		ReturnObject result = api.login(username, password);
+        ReturnObject result = api.postSave();
+        //ReturnObject result = api.login(username, password);
 		bool status = result.retStatus;
 		popupText = result.text;
 
