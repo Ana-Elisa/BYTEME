@@ -18,7 +18,7 @@ public class PlayerHealth : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		
+		player = GameObject.Find ("Player");
 	}
 	
 	// Update is called once per frame
@@ -28,7 +28,7 @@ public class PlayerHealth : MonoBehaviour {
 
 	void OnCollisionEnter2D(Collision2D other)
 	{
-		if (other.gameObject.tag == "Enemy") {
+		if (other.gameObject.tag == "Enemy" && !this.GetComponent<PlayerAttack>().getAttackStatus()) {
 			TakeDamage (20);
 		}
 	}
@@ -53,8 +53,8 @@ public class PlayerHealth : MonoBehaviour {
 		print ("DEAD ggez");
 
 		//Screen.lockCursor = true;
-		GameObject.Find("Player").GetComponent<PlayerControl> ().enabled = false;
 
+		GameObject.Find("Player").GetComponent<PlayerC> ().enabled = false;
 		//move.enabled = false;
 		//Im going to worry about this later because i'm tilted
 		//FreezeCam ();

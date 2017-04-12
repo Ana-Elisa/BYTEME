@@ -5,19 +5,19 @@ using UnityEngine;
 public class EnemyHealthManager : MonoBehaviour {
 
 
-    public int maxHealth;
-    public int currentHealth;
+    public int enemyMaxHealth;
+    public int enemyCurrentHealth;
     public GameObject deathEffect;
 
-    //points?
+
 
     private void Start()
     {
-        currentHealth = maxHealth;
+        enemyCurrentHealth = enemyMaxHealth;
     }
     private void Update()
     {
-        if (currentHealth <= 0) {
+        if (enemyCurrentHealth <= 0) {
            // Instantiate(deathEffect, transform.position, transform.rotation);
             //add points
             Destroy(gameObject);
@@ -25,7 +25,7 @@ public class EnemyHealthManager : MonoBehaviour {
 
 
     }
-    public void Damage(int damageToGive) {
-        currentHealth -= damageToGive;
+    public void giveDamage(int damageToGive) {
+        enemyCurrentHealth -= damageToGive;
     }
 }
