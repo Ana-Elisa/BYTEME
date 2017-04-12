@@ -242,9 +242,12 @@ public class APIActions : MonoBehaviour {
 
 			var items = obj.GetField ("item_list").ToDictionary();
 			print (items);
-			foreach (string item in items) {
+
+			//Michael this is causing an error 
+			/*foreach (string item in items) 
+			{
 				print (item);
-			}
+			}*/
 		}
 		else
 		{
