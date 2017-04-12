@@ -28,7 +28,7 @@ public class PlayerHealth : MonoBehaviour {
 
 	void OnCollisionEnter2D(Collision2D other)
 	{
-		if (other.gameObject.tag == "Enemy") {
+		if (other.gameObject.tag == "Enemy" && !player.GetComponent<PlayerAttack>().getAttackStatus()) {
 			TakeDamage (20);
 		}
 	}
@@ -54,7 +54,7 @@ public class PlayerHealth : MonoBehaviour {
 
 		//Screen.lockCursor = true;
 
-		GameObject.Find("Player").GetComponent<PlayerControl> ().enabled = false;
+		GameObject.Find("Player").GetComponent<PlayerC> ().enabled = false;
 		//move.enabled = false;
 		//Im going to worry about this later because i'm tilted
 		//FreezeCam ();

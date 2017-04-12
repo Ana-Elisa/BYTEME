@@ -15,9 +15,9 @@ public class AttackTrigger : MonoBehaviour {
 		if(col.gameObject.tag == "Enemy")
 		{
         	print("Attack trigger hit");
-            Destroy(col.gameObject);
-            //col.GetComponent<EnemyHealthManager>().giveDamage(damage);
-
+            //Destroy(col.gameObject);
+            col.gameObject.GetComponent<EnemyHealthManager>().giveDamage(damage);
+			//col.gameObject.SendMessageUpwards ("Damage", damage);
         }
 	}
 }
