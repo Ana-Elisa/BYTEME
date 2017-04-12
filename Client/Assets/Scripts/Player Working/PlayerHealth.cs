@@ -18,7 +18,7 @@ public class PlayerHealth : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		
+		player = GameObject.Find ("Player");
 	}
 	
 	// Update is called once per frame
@@ -28,7 +28,7 @@ public class PlayerHealth : MonoBehaviour {
 
 	void OnCollisionEnter2D(Collision2D other)
 	{
-		if (other.gameObject.tag == "Enemy" && !player.GetComponent<PlayerAttack>().getAttackStatus()) {
+		if (other.gameObject.tag == "Enemy" && !this.GetComponent<PlayerAttack>().getAttackStatus()) {
 			TakeDamage (20);
 		}
 	}

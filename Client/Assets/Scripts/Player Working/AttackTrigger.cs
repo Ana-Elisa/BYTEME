@@ -7,17 +7,22 @@ public class AttackTrigger : MonoBehaviour {
 	public int damage = 20;
 
 	void OnCollisionEnter2D(Collision2D col){
-        //whatever colliding with send damage.
-        /*if (col.isTrigger != true && col.CompareTag("Enemy")) {
-			col.SendMessageUpwards ("Damage", damage);
-		}
-        */
+       
 		if(col.gameObject.tag == "Enemy")
 		{
-        	print("Attack trigger hit");
-            //Destroy(col.gameObject);
+        	//apply damage
             col.gameObject.GetComponent<EnemyHealthManager>().giveDamage(damage);
-			//col.gameObject.SendMessageUpwards ("Damage", damage);
+
+
+			//knockback
+			var enemy = col.gameObject.GetComponent<Enemy>();
+			enemy.knockbackCount = enemy.knockbackLength;
+
+			if (col.transform.position.x < transform.position.x) {
+				enemy.knockFromRight = true;
+			} else {
+				enemy.knockFromRight = false;
+			}
         }
 	}
 }

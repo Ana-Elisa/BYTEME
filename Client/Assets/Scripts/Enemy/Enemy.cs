@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour {
-	//public int currentHealth;
-	//public int maxHealth = 30;
     Rigidbody2D rgb2d;
     public float knockback;
     public float knockbackLength;//how long enemy knocked back for
@@ -12,7 +10,7 @@ public class Enemy : MonoBehaviour {
     public bool knockFromRight;
 
 	void Start(){
-		//currentHealth = maxHealth;
+		
         rgb2d = gameObject.GetComponent<Rigidbody2D>();
     }
     private void Update()
@@ -22,6 +20,7 @@ public class Enemy : MonoBehaviour {
         if (knockbackCount <= 0)
         {
             //move enemy around
+			//
         }
         else {
             if (knockFromRight) {
