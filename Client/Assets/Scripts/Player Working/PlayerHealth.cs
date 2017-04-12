@@ -55,6 +55,7 @@ public class PlayerHealth : MonoBehaviour {
 		//Screen.lockCursor = true;
 
 		GameObject.Find("Player").GetComponent<PlayerC> ().enabled = false;
+		GameObject.Find("Player").GetComponent<PlayerAttack> ().enabled = false;
 		//move.enabled = false;
 		//Im going to worry about this later because i'm tilted
 		//FreezeCam ();
