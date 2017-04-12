@@ -39,5 +39,8 @@ public class PlayerAttack : MonoBehaviour {
 		}
 		anim.SetBool ("Attacking", attacking);
 	}
+	public bool getAttackStatus(){
+		return attacking;
+	}
     
 }
