@@ -203,4 +203,67 @@ public class APIActions : MonoBehaviour {
 
     }
 
+	public ReturnObject getSave()
+	{
+		string url = "https://byteme.online/api/save/";
+		bool result = false;
+		string result_text = "";
+
+		UnityWebRequest request = UnityWebRequest.Get(url);
+		request.SetRequestHeader ("Authorization", "Token eee37ef9408de55176db375bedcf63e3f24c50f6");
+		request.SetRequestHeader("Content-Type", "application/json");
+
+
+		request.Send();
+
+		int limit = 3000;
+		int counter = 0;
+		while ((!request.isDone || !request.downloadHandler.isDone) && counter != limit)
+		{
+			//Keep looping until the request finishes or errors
+			System.Threading.Thread.Sleep(1);
+			counter++;
+		}
+
+		print(limit + " " + counter);
+		if (request.isError || counter == limit)
+		{
+			return new ReturnObject(false, "Could not connect to server");
+		}
+
+		if (request.responseCode == 200)
+		{
+			print(request.responseCode);
+			print(request.downloadHandler.text);
+			JSONObject obj2 = new JSONObject(request.downloadHandler.text);
+			string obj3 = obj2.GetField ("results")[0].ToString ();
+			print (obj3.ToString());
+			JSONObject obj = new JSONObject(obj3.ToString());
+
+			var items = obj.GetField ("item_list").ToDictionary();
+			print (items);
+			foreach (string item in items) {
+				print (item);
+			}
+		}
+		else
+		{
+			print(request.responseCode);
+			print(request.downloadHandler.text);
+			JSONObject obj = new JSONObject(request.downloadHandler.text);
+			List<string> keyList = obj.keys;
+
+			foreach (string item in keyList) {
+				result_text += item;
+				result_text += " - " + obj.GetField(item).ToString().Replace("\"", "") + "\n";
+			}
+
+			print(result_text);
+			result = false;
+		}
+
+		return new ReturnObject(result, result_text);
+
+	}
+
 }
