@@ -5,6 +5,8 @@ using UnityEngine;
 public class StageGeneratorScript : MonoBehaviour {
 
 	public Transform[] roomGenerators = new Transform[16];
+	public Transform player;
+	public Transform exit;
 	public int stageWidth = 4;
 	public int stageHeight = 4;
 	public float roomWidth = 10f;
@@ -14,6 +16,7 @@ public class StageGeneratorScript : MonoBehaviour {
 	int Down = 4;
 	int Left = 8;
 	int startX;
+	int endX;
 	//This must have 16 entries, and must be inserted in a specific way
 	//  think of the directions the room opens into like a binary number in the following way:
 	//   U - 1
@@ -29,6 +32,7 @@ public class StageGeneratorScript : MonoBehaviour {
 		Stack<Vector2> stack = new Stack<Vector2> ();
 		HashSet<Vector2> visited = new HashSet<Vector2> ();
 		startX = (int)(Random.value * stageWidth);
+		endX = (int)(Random.value * stageWidth);
 		stack.Push(new Vector2(startX,0));
 		while (stack.Count > 0) {
 			List<int> candid = new List<int> ();
@@ -96,6 +100,12 @@ public class StageGeneratorScript : MonoBehaviour {
 		for (int y = 0; y < stageHeight; y++) {
 			for (int x = 0; x < stageWidth; x++) {
 				Instantiate (roomGenerators [directions [x, y]], transform.position + Vector3.right * xoff + Vector3.down * yoff, Quaternion.identity);
+				if (y == 0 && x == startX) {
+					Instantiate (player, transform.position + Vector3.right * (xoff+(roomWidth/2)) + Vector3.down * (yoff+(roomHeight/2)), Quaternion.identity);
+				}
+				if (y == stageHeight-1 && x == endX) {
+					Instantiate (exit, transform.position + Vector3.right * (xoff+(roomWidth/2)) + Vector3.down * (yoff+(roomHeight/2)), Quaternion.identity);
+				}
 				xoff += roomWidth;
 			}
 			xoff = 0f;
