@@ -91,14 +91,14 @@ public class StageGeneratorScript : MonoBehaviour {
 			}
 		}
 
-		float xoff = 0;
-		float yoff = 0;
+		float xoff = 0f;
+		float yoff = 0f;
 		for (int y = 0; y < stageHeight; y++) {
 			for (int x = 0; x < stageWidth; x++) {
 				Instantiate (roomGenerators [directions [x, y]], transform.position + Vector3.right * xoff + Vector3.down * yoff, Quaternion.identity);
 				xoff += roomWidth;
 			}
-			xoff = 0;
+			xoff = 0f;
 			yoff += roomHeight;
 		}
 
