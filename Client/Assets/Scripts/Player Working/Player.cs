@@ -100,7 +100,7 @@ public class Player : MonoBehaviour {
 	void AddDamage(int amount)
 	{
 		currentDamage = currentDamage + amount;
-		damageSlider = currentDamage + amount;
+		damageSlider.value = currentDamage + amount;
 		
 	}
 
