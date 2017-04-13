@@ -32,6 +32,16 @@ public class TestDataCall : MonoBehaviour {
 
 			player.itemList.Add (3);
 
+			string test = "{\"test\": 2, \"test2\": [10, 20]}";
+
+			TestPlayer test2 = JsonUtility.FromJson<TestPlayer> (test);
+			print (test2.test);
+			foreach (int item in test2.test2) {
+				print (item);
+			}
+
+			print (test2.SaveToString ());
+
 		}
 
 	}

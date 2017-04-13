@@ -14,6 +14,24 @@ public class ReturnObject {
 
 }
 
+[System.Serializable]
+public class TestPlayer {
+	public int test;
+	public List<int> test2 = new List<int> ();
+
+	public string SaveToString()
+	{
+		return JsonUtility.ToJson(this);
+	}
+
+	public static TestPlayer CreateFromJSON(string jsonString)
+	{
+		return JsonUtility.FromJson<TestPlayer>(jsonString);
+	}
+}
+
+
+
 public class APIActions : MonoBehaviour {
 
 	private string token;
@@ -164,33 +182,28 @@ public class APIActions : MonoBehaviour {
 
         int limit = 3000;
         int counter = 0;
-        while ((!request.isDone || !request.downloadHandler.isDone) && counter != limit)
-        {
+        while ((!request.isDone || !request.downloadHandler.isDone) && counter != limit) {
             //Keep looping until the request finishes or errors
             System.Threading.Thread.Sleep(1);
             counter++;
         }
 
         print(limit + " " + counter);
-        if (request.isError || counter == limit)
-        {
+        if (request.isError || counter == limit) {
             return new ReturnObject(false, "Could not connect to server");
         }
 
-        if (request.responseCode == 200)
-        {
+        if (request.responseCode == 200) {
             result = true;
             print("Successfull!");
         }
-        else
-        {
+        else {
             print(request.responseCode);
             print(request.downloadHandler.text);
             JSONObject obj = new JSONObject(request.downloadHandler.text);
             List<string> keyList = obj.keys;
 
-            foreach (string item in keyList)
-            {
+            foreach (string item in keyList) {
                 result_text += item;
                 result_text += " - " + obj.GetField(item).ToString().Replace("\"", "") + "\n";
             }
@@ -203,8 +216,7 @@ public class APIActions : MonoBehaviour {
 
     }
 
-	public ReturnObject getSave()
-	{
+	public ReturnObject getSave() {
 		string url = "https://byteme.online/api/save/";
 		bool result = false;
 		string result_text = "";
@@ -218,21 +230,18 @@ public class APIActions : MonoBehaviour {
 
 		int limit = 3000;
 		int counter = 0;
-		while ((!request.isDone || !request.downloadHandler.isDone) && counter != limit)
-		{
+		while ((!request.isDone || !request.downloadHandler.isDone) && counter != limit) {
 			//Keep looping until the request finishes or errors
 			System.Threading.Thread.Sleep(1);
 			counter++;
 		}
 
 		print(limit + " " + counter);
-		if (request.isError || counter == limit)
-		{
+		if (request.isError || counter == limit) {
 			return new ReturnObject(false, "Could not connect to server");
 		}
 
-		if (request.responseCode == 200)
-		{
+		if (request.responseCode == 200) {
 			print(request.responseCode);
 			print(request.downloadHandler.text);
 			JSONObject obj2 = new JSONObject(request.downloadHandler.text);
@@ -248,9 +257,7 @@ public class APIActions : MonoBehaviour {
 			{
 				print (item);
 			}*/
-		}
-		else
-		{
+		} else {
 			print(request.responseCode);
 			print(request.downloadHandler.text);
 			JSONObject obj = new JSONObject(request.downloadHandler.text);
