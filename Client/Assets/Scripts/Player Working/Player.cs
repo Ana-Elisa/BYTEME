@@ -91,6 +91,25 @@ public class Player : MonoBehaviour {
 		}
 	}
 
+	void AddHealth(int amount)
+	{
+		currentHealth = currentHealth + amount;
+		healthSlider.value = currentHealth;
+	}
+
+	void AddDamage(int amount)
+	{
+		currentDamage = currentDamage + amount;
+		damageSlider.value = currentDamage + amount;
+		
+	}
+
+	void AddSpeed(int amount)
+	{
+		currentSpeed = currentSpeed + amount;
+		speedSlider.value = currentSpeed;
+	}
+
 	 void Death()
 	{
 		isDead = true;
@@ -105,23 +124,18 @@ public class Player : MonoBehaviour {
 		{
 			print ("YarnBall Collided");
 			Destroy (other.gameObject);
-
-			//put this in a method later
-			currentDamage = currentDamage + 10;
-			damageSlider.value = currentDamage;
+			AddDamage (20);
 
 			// Add item id to list
 			itemList.Add (1);
+
 		}
 
 		if (other.gameObject.name == "RiceBall") 
 		{
 			print ("RiceBall Collided");
 			Destroy (other.gameObject);
-
-			//put this into a mathod later
-			currentSpeed = currentSpeed + 10;
-			speedSlider.value = currentSpeed;
+			AddSpeed(20);
 
 			// Add item id to list
 			itemList.Add (2);
@@ -131,9 +145,7 @@ public class Player : MonoBehaviour {
 		{
 			print ("RiceBowl Collided");
 			Destroy (other.gameObject);
-
-			currentHealth = currentHealth + 10;
-			healthSlider.value = currentHealth;
+			AddHealth (20);
 
 			// Add item id to list
 			itemList.Add (3);
@@ -143,17 +155,21 @@ public class Player : MonoBehaviour {
 		{
 			print ("ChickenLeg Collided");
 			Destroy (other.gameObject);
+			AddHealth (10);
 
 			// Add item id to list
 			itemList.Add (4);
+
 		}
 		if (other.gameObject.name == "TunaCan")
 		{
 			print ("TunaCan Collided");
 			Destroy (other.gameObject);
+			AddHealth (20);
 
 			// Add item id to list
 			itemList.Add (5);
+
 		}
 
 
