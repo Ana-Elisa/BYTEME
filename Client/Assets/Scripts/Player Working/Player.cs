@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class Player : MonoBehaviour {
 
+	public List<int> itemList = new List<int>();
+
 	//All the Health stuff
 	public Slider healthSlider;
 	public int startingHealth = 100;
@@ -123,6 +125,10 @@ public class Player : MonoBehaviour {
 			print ("YarnBall Collided");
 			Destroy (other.gameObject);
 			AddDamage (20);
+
+			// Add item id to list
+			itemList.Add (1);
+
 		}
 
 		if (other.gameObject.name == "RiceBall") 
@@ -131,6 +137,8 @@ public class Player : MonoBehaviour {
 			Destroy (other.gameObject);
 			AddSpeed(20);
 
+			// Add item id to list
+			itemList.Add (2);
 		}
 
 		if (other.gameObject.name == "RiceBowl") 
@@ -138,6 +146,9 @@ public class Player : MonoBehaviour {
 			print ("RiceBowl Collided");
 			Destroy (other.gameObject);
 			AddHealth (20);
+
+			// Add item id to list
+			itemList.Add (3);
 		}
 
 		if (other.gameObject.name == "ChickenLeg")
@@ -145,12 +156,20 @@ public class Player : MonoBehaviour {
 			print ("ChickenLeg Collided");
 			Destroy (other.gameObject);
 			AddHealth (10);
+
+			// Add item id to list
+			itemList.Add (4);
+
 		}
 		if (other.gameObject.name == "TunaCan")
 		{
 			print ("TunaCan Collided");
 			Destroy (other.gameObject);
 			AddHealth (20);
+
+			// Add item id to list
+			itemList.Add (5);
+
 		}
 
 
