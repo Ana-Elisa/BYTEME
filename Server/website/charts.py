@@ -95,20 +95,25 @@ class PieChartItemsFound(Chart):
 
     def get_labels(self, *args, **kwargs):
         item_list = list(Item.objects.all().order_by('item_id'))
-        return [item.item_id for item in item_list]
+        return [item.name for item in item_list]
 
     def get_datasets(self, *args, **kwargs):
         max = Item.objects.all().aggregate(Max('item_id'))['item_id__max'] + 1
-        data = [0 for i in range(0, max)]
+        data = [0 for i in range(0, max-1)]
         game_data = GameSave.objects.all()
 
         for save in game_data:
             for item in save.save_items.all():
-                data[int(item.item_id)] += 1
-
-        data = [item for item in data if item != 0]
+                data[int(item.item_id)-1] += 1
 
         return [DataSet(
             label='Number of times each item has been found',
-            data=data
+            data=data,
+            backgroundColor=[
+                rgba(193, 66, 66, 0.3),
+                rgba(153, 102, 255, 0.3),
+                rgba(75, 192, 192, 0.3),
+                rgba(63, 191, 127, 0.3),
+                rgba(255, 159, 64, 0.3)
+            ]
         )]
