@@ -9,6 +9,8 @@ from Auth.serializers import UserSerializer
 
 from.permissions import IsStaffOrPOST
 
+User._meta.get_field('email')._unique = True
+
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
