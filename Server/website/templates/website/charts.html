@@ -38,7 +38,26 @@
 								<p>Leaderboard and Graphs From Each Player's Save Data!</p>
 							</header>
 							<div class="align-center">
-                                <p>(Leaderboard here...)</p>
+                                <table>
+                                <tr>
+                                    <th>Name</th>
+                                    <th># Items Found</th>
+                                    <th>Attach</th>
+                                    <th>Defense</th>
+                                    <th>Speed</th>
+                                    <th>Health</th>
+                                    <th>Max Health</th>
+                                    <th>Next Level</th>
+                                    <th>Time</th>
+                                </tr>
+                                    {% for save in leaderboard %}
+                                        <tr>
+                                            {% for attr in save %}
+                                                <td>{{ attr }}</td>
+                                            {% endfor %}
+                                        </tr>
+                                    {% endfor %}
+                                </table>
 							</div>
 						</div>
 					</section>
