@@ -12,6 +12,7 @@ public class Player : MonoBehaviour {
 	//All the Health stuff
 	public Slider healthSlider;
 	public int currentHealth;
+	public int maxHealth;
 
 	//All the Damage stuff
 	public Slider damageSlider;

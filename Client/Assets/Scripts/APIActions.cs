@@ -16,34 +16,37 @@ public class ReturnObject {
 
 [System.Serializable]
 public class JSONPlayer : MonoBehaviour {
-	public List<int> itemList = new List<int>();
+	public List<int> item_list = new List<int>();
 
 	//All the Health stuff
-	public int currentHealth;
+	public int health;
+	public int total_health;
 
 	//All the Damage stuff
-	public int currentDamage;
+	public int attack;
 
 	//All the speed stuff
-	public int currentSpeed;
+	public int speed;
 
 	//All the defense stuff
-	public int currentDefense;
+	public int defence;
 
 	public JSONPlayer() {
 		Player player = FindObjectOfType (typeof(Player)) as Player;
-		currentHealth = player.currentHealth;
-		currentDamage = player.currentDamage;
-		currentSpeed = player.currentSpeed;
-		currentDefense = player.currentDefense;
+		health = player.currentHealth;
+		total_health = player.maxHealth;
+		attack = player.currentDamage;
+		speed = player.currentSpeed;
+		defence = player.currentDefense;
+		item_list = player.itemList;
 	}
 
 	public void setPlayerStats() {
 		Player player = FindObjectOfType (typeof(Player)) as Player;
-		player.SetHealth (currentHealth);
-		player.SetDamage (currentDamage);
-		player.SetSpeed (currentSpeed);
-		player.SetDefense (currentDefense);
+		player.SetHealth (health);
+		player.SetDamage (attack);
+		player.SetSpeed (speed);
+		player.SetDefense (defence);
 	}
 
 	public string ToJSON() {
@@ -170,7 +173,7 @@ public class APIActions : MonoBehaviour {
 
         //print(userInfo.ToString());
         UnityWebRequest request = UnityWebRequest.Post(url, body);
-        request.SetRequestHeader ("Authorization", "Token eee37ef9408de55176db375bedcf63e3f24c50f6");
+		request.SetRequestHeader ("Authorization", "Token " + token);
         request.SetRequestHeader("Content-Type", "application/json");
         request.uploadHandler = uh;
 
@@ -219,7 +222,7 @@ public class APIActions : MonoBehaviour {
 		string result_text = "";
 
 		UnityWebRequest request = UnityWebRequest.Get(url);
-		request.SetRequestHeader ("Authorization", "Token eee37ef9408de55176db375bedcf63e3f24c50f6");
+		request.SetRequestHeader ("Authorization", "Token " + token);
 		request.SetRequestHeader("Content-Type", "application/json");
 
 
@@ -246,6 +249,7 @@ public class APIActions : MonoBehaviour {
 
 			if (count == 1) {
 				JSONObject saveData = obj.GetField("results");
+				print (saveData [0].ToString ());
 				JSONPlayer jsonPlayer = JsonUtility.FromJson<JSONPlayer> (saveData[0].ToString());
 				jsonPlayer.setPlayerStats ();
 			} else {
@@ -256,6 +260,16 @@ public class APIActions : MonoBehaviour {
 				player.SetDefense (20);
 			}
 		} else {
+
+			// FOR TESTING DO NOT LEAVE IN PRODUCTION!!!!!!! (... or should we?)
+
+			Player player = FindObjectOfType (typeof(Player)) as Player;
+			player.SetHealth (100);
+			player.SetDamage (20);
+			player.SetSpeed (20);
+			player.SetDefense (20);
+
+			/*
 			print(request.responseCode);
 			print(request.downloadHandler.text);
 			JSONObject obj = new JSONObject(request.downloadHandler.text);
@@ -267,7 +281,7 @@ public class APIActions : MonoBehaviour {
 			}
 
 			print(result_text);
-			result = false;
+			result = false;*/
 		}
 
 		return new ReturnObject(result, result_text);
