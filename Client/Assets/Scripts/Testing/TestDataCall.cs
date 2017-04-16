@@ -18,6 +18,8 @@ public class TestDataCall : MonoBehaviour {
 
 		if (other.tag == "Player") 
 		{
+			Player player = FindObjectOfType (typeof(Player)) as Player;
+			player.AddDefense (10);
 			APIActions.postSave ();
 		}
 

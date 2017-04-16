@@ -94,26 +94,26 @@ public class Player : MonoBehaviour {
 		}
 	}
 
-	void AddHealth(int amount)
+	public void AddHealth(int amount)
 	{
 		currentHealth = currentHealth + amount;
 		healthSlider.value = currentHealth;
 	}
 
-	void AddDamage(int amount)
+	public void AddDamage(int amount)
 	{
 		currentDamage = currentDamage + amount;
 		damageSlider.value = currentDamage;
 		
 	}
 
-	void AddSpeed(int amount)
+	public void AddSpeed(int amount)
 	{
 		currentSpeed = currentSpeed + amount;
 		speedSlider.value = currentSpeed;
 	}
 
-	void AddDefense(int amount)
+	public void AddDefense(int amount)
 	{
 		currentDefense = currentDefense + amount;
 		defenseSlider.value = currentDefense;
