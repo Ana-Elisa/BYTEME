@@ -52,8 +52,6 @@ public class Player : MonoBehaviour {
 		currentSpeed = startingSpeed;
 		speedSlider.value = currentSpeed;
 
-
-
 		//For save
 		if (isSave == true) 
 		{
