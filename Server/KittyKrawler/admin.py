@@ -22,9 +22,13 @@ class LeaderboardAdmin(admin.ModelAdmin):
         return obj.game_save.current
     get_save_current.short_description = 'Current'
 
+class ItemAdmin(admin.ModelAdmin):
+    model = Item
+    list_display = ('item_id', 'name')
+
 admin.site.register(GameSave, GameSaveAdmin)
 admin.site.register(Leaderboard, LeaderboardAdmin)
-admin.site.register(Item)
+admin.site.register(Item, ItemAdmin)
 
 
 #admin.site.site_header = 'BYTEME Administration'
