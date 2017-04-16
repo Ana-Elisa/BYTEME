@@ -57,7 +57,6 @@ public class JSONPlayer : MonoBehaviour {
 }
 
 
-
 public class APIActions : MonoBehaviour {
 
 	private static string token;
@@ -203,7 +202,7 @@ public class APIActions : MonoBehaviour {
 
             foreach (string item in keyList) {
                 result_text += item;
-                result_text += " - " + obj.GetField(item).ToString().Replace("\"", "") + "\n";
+                result_text += ": " + obj.GetField(item).ToString().Replace("\"", "") + "\n";
             }
 
             print(result_text);
@@ -240,20 +239,35 @@ public class APIActions : MonoBehaviour {
 		}
 
 		if (request.responseCode == 200) {
+			string json = request.downloadHandler.text;
+
+			JSONObject obj = new JSONObject(json);
+			long count = obj.GetField("count").i;
+
+			if (count == 1) {
+				JSONObject saveData = obj.GetField("results");
+				JSONPlayer jsonPlayer = JsonUtility.FromJson<JSONPlayer> (saveData[0].ToString());
+				jsonPlayer.setPlayerStats ();
+			} else {
+				Player player = FindObjectOfType (typeof(Player)) as Player;
+				player.SetHealth (100);
+				player.SetDamage (20);
+				player.SetSpeed (20);
+				player.SetDefense (20);
+			}
+		} else {
 			print(request.responseCode);
 			print(request.downloadHandler.text);
-			JSONObject obj2 = new JSONObject(request.downloadHandler.text);
-			string obj3 = obj2.GetField ("results")[0].ToString ();
-			print (obj3.ToString());
-			JSONObject obj = new JSONObject(obj3.ToString());
+			JSONObject obj = new JSONObject(request.downloadHandler.text);
+			List<string> keyList = obj.keys;
 
-			var items = obj.GetField ("item_list").ToDictionary();
-			print (items);
+			foreach (string item in keyList) {
+				result_text += item;
+				result_text += ": " + obj.GetField(item).ToString().Replace("\"", "") + "\n";
+			}
 
-		} else {
-			string json = request.downloadHandler.text;
-			JSONPlayer jsonPlayer = JsonUtility.FromJson<JSONPlayer> (json);
-			jsonPlayer.setPlayerStats ();
+			print(result_text);
+			result = false;
 		}
 
 		return new ReturnObject(result, result_text);
