@@ -5,22 +5,25 @@ using UnityEngine.UI;
 
 public class Player : MonoBehaviour {
 
+
+
 	public List<int> itemList = new List<int>();
 
 	//All the Health stuff
 	public Slider healthSlider;
-	public int startingHealth = 100;
 	public int currentHealth;
 
 	//All the Damage stuff
 	public Slider damageSlider;
-	public int startingDamage = 20;
 	public int currentDamage;
 
 	//All the speed stuff
 	public Slider speedSlider;
-	public int startingSpeed = 20;
 	public int currentSpeed;
+
+	//All the defense stuff
+	public Slider defenseSlider;
+	public int currentDefense;
 
 	//Set-up
 	GameObject player;
@@ -34,8 +37,10 @@ public class Player : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		APIActions.getSave ();
+
 		//Find the player
-		player = GameObject.Find ("Player");
+		/*player = GameObject.Find ("Player");
 
 		//Load players stats NEW GAME MODE
 		currentHealth = startingHealth;
@@ -56,7 +61,7 @@ public class Player : MonoBehaviour {
 			healthSlider.value = currentHealth;
 			damageSlider.value = currentDamage;
 			speedSlider.value = currentSpeed;
-		}
+		}*/
 
 	}
 	
@@ -100,7 +105,7 @@ public class Player : MonoBehaviour {
 	void AddDamage(int amount)
 	{
 		currentDamage = currentDamage + amount;
-		damageSlider.value = currentDamage + amount;
+		damageSlider.value = currentDamage;
 		
 	}
 
@@ -108,6 +113,37 @@ public class Player : MonoBehaviour {
 	{
 		currentSpeed = currentSpeed + amount;
 		speedSlider.value = currentSpeed;
+	}
+
+	void AddDefense(int amount)
+	{
+		currentDefense = currentDefense + amount;
+		defenseSlider.value = currentDefense;
+	}
+
+	public void SetHealth(int amount)
+	{
+		currentHealth = amount;
+		healthSlider.value = currentHealth;
+	}
+
+	public void SetDamage(int amount)
+	{
+		currentDamage = amount;
+		damageSlider.value =  currentDamage;
+
+	}
+
+	public void SetSpeed(int amount)
+	{
+		currentSpeed = amount;
+		speedSlider.value = currentSpeed;
+	}
+
+	public void SetDefense(int amount)
+	{
+		currentDefense = amount;
+		defenseSlider.value = currentDefense;
 	}
 
 	 void Death()
