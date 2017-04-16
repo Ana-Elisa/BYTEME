@@ -10,7 +10,6 @@ using UnityEngine.Networking;
 
 
 public class SwitchScenes : MonoBehaviour {
-	private APIActions api = new APIActions();
 
     private Button enterGameButton;
     private Button forgotPasswordButton;
@@ -116,13 +115,13 @@ public class SwitchScenes : MonoBehaviour {
     }
 
     private void loadGame() {
-        ReturnObject result = api.getSave();
+		ReturnObject result = APIActions.getSave();
         //ReturnObject result = api.login(username, password);
 		bool status = result.retStatus;
 		popupText = result.text;
 
 		if (status == true)
-			SceneManager.LoadScene ("PlayerHealth");
+			SceneManager.LoadScene ("Ana'sLevel");
 		else {
 			showPopup = true;
 		}
