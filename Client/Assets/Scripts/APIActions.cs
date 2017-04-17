@@ -15,7 +15,9 @@ public class ReturnObject {
 }
 
 [System.Serializable]
-public class JSONPlayer : MonoBehaviour {
+public class JSONPlayer {
+
+	//Item list
 	public List<int> item_list = new List<int>();
 
 	//All the Health stuff
@@ -31,18 +33,28 @@ public class JSONPlayer : MonoBehaviour {
 	//All the defense stuff
 	public int defence;
 
-	public JSONPlayer() {
-		Player player = FindObjectOfType (typeof(Player)) as Player;
+	//Next level
+	public int next_level;
+
+	//Time
+	public string time;
+
+	//Garbage needed to make serializer work
+	string user_name;
+
+
+	public JSONPlayer(Player player) {
 		health = player.currentHealth;
 		total_health = player.maxHealth;
 		attack = player.currentDamage;
 		speed = player.currentSpeed;
 		defence = player.currentDefense;
 		item_list = player.itemList;
+		next_level = 1;
+		time = "00:00:00";
 	}
 
-	public void setPlayerStats() {
-		Player player = FindObjectOfType (typeof(Player)) as Player;
+	public void setPlayerStats(Player player) {
 		player.SetHealth (health);
 		player.SetDamage (attack);
 		player.SetSpeed (speed);
@@ -51,10 +63,6 @@ public class JSONPlayer : MonoBehaviour {
 
 	public string ToJSON() {
 		return JsonUtility.ToJson(this);
-	}
-
-	public static JSONPlayer CreateFromJSON(string jsonString) {
-		return JsonUtility.FromJson<JSONPlayer>(jsonString);
 	}
 
 }
@@ -94,7 +102,7 @@ public class APIActions : MonoBehaviour {
 
 		if (request.responseCode == 200 ) {
 			JSONObject obj = new JSONObject (request.downloadHandler.text);
-			token = obj.GetField ("token").ToString();
+			token = obj.GetField ("token").ToString().Replace("\"", "");
 			result = true;
 		} else {
 			JSONObject obj = new JSONObject (request.downloadHandler.text);
@@ -162,21 +170,22 @@ public class APIActions : MonoBehaviour {
 	}
 
     public static ReturnObject postSave() {
+		print (token);
+
         string url = "https://byteme.online/api/save/";
         bool result = false;
         string result_text = "";
 
-		JSONPlayer jsonPlayer = new JSONPlayer ();
+		JSONPlayer jsonPlayer = new JSONPlayer (FindObjectOfType (typeof(Player)) as Player);
 		string body = jsonPlayer.ToJSON ();
         byte[] bytes = System.Text.Encoding.UTF8.GetBytes(body);
         UploadHandlerRaw uh = new UploadHandlerRaw(bytes);
 
         //print(userInfo.ToString());
         UnityWebRequest request = UnityWebRequest.Post(url, body);
-		request.SetRequestHeader ("Authorization", "Token " + token);
+		request.SetRequestHeader ("Authorization", string.Concat ("Token ", token));
         request.SetRequestHeader("Content-Type", "application/json");
         request.uploadHandler = uh;
-
 
         request.Send();
 
@@ -193,7 +202,7 @@ public class APIActions : MonoBehaviour {
             return new ReturnObject(false, "Could not connect to server");
         }
 
-        if (request.responseCode == 200) {
+        if (request.responseCode == 201) {
             result = true;
             print("Successfull!");
         }
@@ -217,12 +226,14 @@ public class APIActions : MonoBehaviour {
     }
 
 	public static ReturnObject getSave() {
+		print (token);
+
 		string url = "https://byteme.online/api/save/";
 		bool result = false;
 		string result_text = "";
 
 		UnityWebRequest request = UnityWebRequest.Get(url);
-		request.SetRequestHeader ("Authorization", "Token " + token);
+		request.SetRequestHeader ("Authorization", string.Concat ("Token ", token));
 		request.SetRequestHeader("Content-Type", "application/json");
 
 
@@ -243,6 +254,7 @@ public class APIActions : MonoBehaviour {
 
 		if (request.responseCode == 200) {
 			string json = request.downloadHandler.text;
+			print (json);
 
 			JSONObject obj = new JSONObject(json);
 			long count = obj.GetField("count").i;
@@ -251,7 +263,7 @@ public class APIActions : MonoBehaviour {
 				JSONObject saveData = obj.GetField("results");
 				print (saveData [0].ToString ());
 				JSONPlayer jsonPlayer = JsonUtility.FromJson<JSONPlayer> (saveData[0].ToString());
-				jsonPlayer.setPlayerStats ();
+				jsonPlayer.setPlayerStats (FindObjectOfType (typeof(Player)) as Player);
 			} else {
 				Player player = FindObjectOfType (typeof(Player)) as Player;
 				player.SetHealth (100);
@@ -260,6 +272,7 @@ public class APIActions : MonoBehaviour {
 				player.SetDefense (20);
 			}
 		} else {
+			print (request.responseCode);
 
 			// FOR TESTING DO NOT LEAVE IN PRODUCTION!!!!!!! (... or should we?)
 
