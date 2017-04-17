@@ -3,15 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyPatrol : MonoBehaviour {
-    public float moveSpeed;
-    public bool moveRight;
+    public float speed;
     public Rigidbody2D rgb2d;
+	public Collider2D nose;
 
-    public Transform wallCheck;
+    /*public Transform wallCheck;
     public float wallCheckRadius;
     public LayerMask whatIsWall;
-    private bool hittingWall;
-
+    private bool hittingWall;*/
+	public float direction = 1; //- = left + = right
 
 
     // Use this for initialization
@@ -21,11 +21,12 @@ public class EnemyPatrol : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-
-        hittingWall = Physics2D.OverlapCircle(wallCheck.position, wallCheckRadius, whatIsWall);
+        /*hittingWall = Physics2D.OverlapCircle(wallCheck.position, wallCheckRadius, whatIsWall);
         if (hittingWall) {
             moveRight = !moveRight;
         }
+
+
         //patrols
         if (moveRight) {
             transform.localScale = new Vector3(-1f, 1f, 1f);
@@ -34,6 +35,34 @@ public class EnemyPatrol : MonoBehaviour {
         {
             transform.localScale = new Vector3(1f, 1f, 1f);
             rgb2d.velocity = new Vector2(-moveSpeed, rgb2d.velocity.y);
-        }
+        }*/
+
+		rgb2d.velocity = new Vector2 (direction*speed, rgb2d.velocity.y);
+	}
+
+	/*void OnCollisionEnter2D(Collision2D col)
+	{
+		if (col.gameObject.tag == "Wall") {
+			print ("Wall Collided");
+			direction = direction * -1;
+			transform.localScale = new Vector3 (transform.localScale.x *-1, transform.localScale.y);
+		}
+
+
+	}
+
+	void onTriggerEnter2D (Collider2D col)
+	{
+		print ("HERE");
+		if (col.gameObject.tag == "Stage") {
+			print ("Wall Collided");
+			direction = direction * -1;
+			transform.localScale = new Vector3 (transform.localScale.x *-1, transform.localScale.y,1f);
+		}
+	}*/
+
+	public void reverse()
+	{
+		direction = direction * -1;
 	}
 }
