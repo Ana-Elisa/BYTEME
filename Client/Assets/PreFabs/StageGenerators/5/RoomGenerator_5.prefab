@@ -52,7 +52,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefabs:
-  - {fileID: 4054932288043882, guid: f4ade558b9d17df4483d1adccd1c19f6, type: 2}
-  - {fileID: 4358263806566902, guid: 804e088404edbe149b10c529e8e7369f, type: 2}
-  - {fileID: 4523053343854816, guid: b6a318a6a5248264883ee2aaf3494feb, type: 2}
+  - {fileID: 4054932288043882, guid: 85d379ca01101df4da90dd62ac4ec7fa, type: 2}
+  - {fileID: 4358263806566902, guid: 21e80b96aac60074b80b7a5551aa44d2, type: 2}
+  - {fileID: 4523053343854816, guid: 52766402abbfb3e4490c910b2391043d, type: 2}
   choice: -1

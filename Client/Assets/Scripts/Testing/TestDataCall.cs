@@ -4,26 +4,36 @@ using UnityEngine;
 
 public class TestDataCall : MonoBehaviour {
 
+	private bool postSave = false;
+	private int frameCount;
+
 	// Use this for initialization
 	void Start () {
-		
+
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		
+		if (postSave && Time.frameCount == frameCount + 10) {
+			print ("posting");
+			LoadingScreen loadingScreen = FindObjectOfType (typeof(LoadingScreen)) as LoadingScreen;
+			APIActions.postSave ();
+			loadingScreen.show = false;
+			postSave = false;
+		}
 	}
 
 	void OnTriggerEnter2D(Collider2D other) {
 
 		if (other.tag == "Player") 
 		{
-			Player player = FindObjectOfType (typeof(Player)) as Player;
-			player.AddDefense (10);
-			APIActions.postSave ();
-			//string shit = "{\"user_name\":\"test\",\"attack\":0,\"defence\":10,\"speed\":0,\"health\":0,\"total_health\":0,\"next_level\":1,\"time\":\"00:00:00\"}";
-			//JSONPlayer jsonPlayer = JsonUtility.FromJson<JSONPlayer> (shit);
-			//print (jsonPlayer.attack);
+			//Player player = FindObjectOfType (typeof(Player)) as Player;
+			LoadingScreen loadingScreen = FindObjectOfType (typeof(LoadingScreen)) as LoadingScreen;
+			//player.AddDefense (10);
+			loadingScreen.show = true;
+			postSave = true;
+
+			frameCount = Time.frameCount;
 		}
 
 	}
