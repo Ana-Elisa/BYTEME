@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class EnemyPatrol : MonoBehaviour {
     public float speed;
+<<<<<<< HEAD
+=======
+    public bool moveRight;
+>>>>>>> refs/remotes/origin/master
     public Rigidbody2D rgb2d;
 	public Collider2D nose;
 
@@ -30,10 +34,11 @@ public class EnemyPatrol : MonoBehaviour {
         //patrols
         if (moveRight) {
             transform.localScale = new Vector3(-1f, 1f, 1f);
-            rgb2d.velocity = new Vector2(moveSpeed, rgb2d.velocity.y);
+            rgb2d.velocity = new Vector2(speed, rgb2d.velocity.y);
         }else
         {
             transform.localScale = new Vector3(1f, 1f, 1f);
+<<<<<<< HEAD
             rgb2d.velocity = new Vector2(-moveSpeed, rgb2d.velocity.y);
         }*/
 
@@ -64,5 +69,9 @@ public class EnemyPatrol : MonoBehaviour {
 	public void reverse()
 	{
 		direction = direction * -1;
+=======
+            rgb2d.velocity = new Vector2(-speed, rgb2d.velocity.y);
+        }
+>>>>>>> refs/remotes/origin/master
 	}
 }

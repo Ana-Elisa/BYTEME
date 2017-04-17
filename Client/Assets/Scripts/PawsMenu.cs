@@ -1,12 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PawsMenu : MonoBehaviour 
 {
 
 	bool paused = false;
 	public Canvas pawsMenu;
+	public Button cont;
+	public Button quit;
 
 	void Start()
 	{
@@ -20,21 +23,30 @@ public class PawsMenu : MonoBehaviour
 			Time.timeScale = 0;
 			print ("paused");
 			paused = true;
-			if (paused) 
-			{
-				pawsMenu.enabled = true;
-			} 
-			else if (!paused) 
-			{
-				pawsMenu.enabled = false;
-			}
+			pawsMenu.enabled = true;
+			GameObject.Find ("Player").GetComponent<PlayerC> ().enabled = false;
+			GameObject.Find ("Player").GetComponent<PlayerAttack> ().enabled = false;
+			Button cBtn = cont.GetComponent<Button> ();
+			Button qBtn = quit.GetComponent<Button> ();
+			cBtn.onClick.AddListener (cOnClick);
+			qBtn.onClick.AddListener (qOnClick);
+			
 		}
 	}
 
-	void onClick()
+	void cOnClick()
 	{
-		//print ("continue");
-		//paused = false;
-		//Time.timeScale = 1;
+		Time.timeScale = 1;
+		paused = false;
+		print ("resumed");
+		pawsMenu.enabled = false;
+		GameObject.Find("Player").GetComponent<PlayerC> ().enabled = true;
+		GameObject.Find("Player").GetComponent<PlayerAttack> ().enabled = true;
 	}
+
+	void qOnClick()
+	{
+		Application.Quit ();
+	}
+		
 }

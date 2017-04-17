@@ -15,29 +15,75 @@ public class ReturnObject {
 }
 
 [System.Serializable]
-public class TestPlayer {
-	public int test;
-	public List<int> test2 = new List<int> ();
+public class JSONPlayer {
 
-	public string SaveToString()
-	{
+	//Item list
+	public List<int> item_list = new List<int>();
+
+	//All the Health stuff
+	public int health;
+	public int total_health;
+
+	//All the Damage stuff
+	public int attack;
+
+	//All the speed stuff
+	public int speed;
+
+	//All the defense stuff
+	public int defence;
+
+	//Next level
+	public int next_level;
+
+	//Time
+	public string time;
+
+	//Garbage needed to make serializer work
+	string user_name;
+
+
+	public JSONPlayer(Player player) {
+		health = player.currentHealth;
+		total_health = player.maxHealth;
+		attack = player.currentDamage;
+		speed = player.currentSpeed;
+		defence = player.currentDefense;
+		item_list = player.itemList;
+		next_level = player.nextLevel;
+
+		int remainder;
+		float total_time = APIActions.time + Time.time;
+		int hours = (int)total_time / 3600;
+		remainder = (int)total_time % 3600;
+		int minutes = remainder / 60;
+		int seconds = remainder % 60;
+
+		time = (hours.ToString() + ":" + minutes.ToString() + ":" + seconds.ToString());
+	}
+
+	public void setPlayerStats(Player player) {
+		player.SetHealth (health);
+		player.SetDamage (attack);
+		player.SetSpeed (speed);
+		player.SetDefense (defence);
+		player.SetNextLevel (next_level);
+		player.SetItemList (item_list);
+	}
+
+	public string ToJSON() {
 		return JsonUtility.ToJson(this);
 	}
 
-	public static TestPlayer CreateFromJSON(string jsonString)
-	{
-		return JsonUtility.FromJson<TestPlayer>(jsonString);
-	}
 }
-
 
 
 public class APIActions : MonoBehaviour {
 
-	private string token;
-	private IEnumerator coroutine;
+	private static string token;
+	public static float time;
 
-	public ReturnObject login(string username, string password) {
+	public static ReturnObject login(string username, string password) {
 		string url = "https://byteme.online/api/token/";
 		bool result = false;
 		string result_text = "";
@@ -47,7 +93,6 @@ public class APIActions : MonoBehaviour {
 		loginInfo.AddField ("password", password);
 
 		UnityWebRequest request = UnityWebRequest.Post (url, loginInfo);
-		//request.SetRequestHeader ("content-type", "application/json");
 	
 
 		request.Send ();
@@ -67,7 +112,7 @@ public class APIActions : MonoBehaviour {
 
 		if (request.responseCode == 200 ) {
 			JSONObject obj = new JSONObject (request.downloadHandler.text);
-			token = obj.GetField ("token").ToString();
+			token = obj.GetField ("token").ToString().Replace("\"", "");
 			result = true;
 		} else {
 			JSONObject obj = new JSONObject (request.downloadHandler.text);
@@ -75,7 +120,7 @@ public class APIActions : MonoBehaviour {
 
 			foreach(string item in keyList) {
 				result_text += item;
-				result_text += " - " + obj.GetField (item)[0].ToString().Replace("\"", "") + "\n";
+				result_text += ": " + obj.GetField (item)[0].ToString().Replace("\"", "") + "\n";
 			}
 
 			print (result_text);
@@ -86,7 +131,7 @@ public class APIActions : MonoBehaviour {
 			
 	}
 
-	public ReturnObject createUser(string username, string email, string password) {
+	public static ReturnObject createUser(string username, string email, string password) {
 		string url = "https://byteme.online/api/user/";
 		bool result = false;
 		string result_text = "";
@@ -96,9 +141,7 @@ public class APIActions : MonoBehaviour {
 		userInfo.AddField ("Email", email);
 		userInfo.AddField ("password", password);
 
-
 		UnityWebRequest request = UnityWebRequest.Post (url, userInfo);
-		//request.SetRequestHeader ("content-type", "application/json");
 
 
 		request.Send ();
@@ -125,7 +168,7 @@ public class APIActions : MonoBehaviour {
 
 			foreach(string item in keyList) {
 				result_text += item;
-				result_text += " - " + obj.GetField (item)[0].ToString().Replace("\"", "") + "\n";
+				result_text += ": " + obj.GetField (item)[0].ToString().Replace("\"", "") + "\n";
 			}
 
 			print (result_text);
@@ -136,47 +179,23 @@ public class APIActions : MonoBehaviour {
 
 	}
 
-    public ReturnObject postSave()
-    {
+    public static ReturnObject postSave() {
+		print (token);
+
         string url = "https://byteme.online/api/save/";
         bool result = false;
         string result_text = "";
 
-        /*WWWForm userInfo = new WWWForm();
-        userInfo.AddField("item_list", items);
-        userInfo.AddField("attack", 5);
-        userInfo.AddField("defence", 6);
-        userInfo.AddField("speed", 10);
-        userInfo.AddField("health", 80);
-        userInfo.AddField("total_health", 100);
-        userInfo.AddField("next_level", 2);
-        userInfo.AddField("time", "1:04:00");*/
-
-        /*List<int> items = new List<int>();
-        items.Add(1);
-        items.Add(2);
-
-        JSONObject userInfo = new JSONObject();
-        //userInfo.AddField("item_list", "[1, 2]");
-        userInfo.AddField("attack", 5);
-        userInfo.AddField("defence", 6);
-        userInfo.AddField("speed", 10);
-        userInfo.AddField("health", 80);
-        userInfo.AddField("total_health", 100);
-        userInfo.AddField("next_level", 2);
-        userInfo.AddField("time", "1:04:00");*/
-
-        string shit = "{\"attack\" : 100, \"item_list\" : [1, 2] }";
-        byte[] bytes = System.Text.Encoding.UTF8.GetBytes(shit);
+		JSONPlayer jsonPlayer = new JSONPlayer (FindObjectOfType (typeof(Player)) as Player);
+		string body = jsonPlayer.ToJSON ();
+        byte[] bytes = System.Text.Encoding.UTF8.GetBytes(body);
         UploadHandlerRaw uh = new UploadHandlerRaw(bytes);
 
         //print(userInfo.ToString());
-        UnityWebRequest request = UnityWebRequest.Post(url, shit);
-        request.SetRequestHeader ("Authorization", "Token eee37ef9408de55176db375bedcf63e3f24c50f6");
+        UnityWebRequest request = UnityWebRequest.Post(url, body);
+		request.SetRequestHeader ("Authorization", string.Concat ("Token ", token));
         request.SetRequestHeader("Content-Type", "application/json");
         request.uploadHandler = uh;
-
-
 
         request.Send();
 
@@ -193,7 +212,7 @@ public class APIActions : MonoBehaviour {
             return new ReturnObject(false, "Could not connect to server");
         }
 
-        if (request.responseCode == 200) {
+        if (request.responseCode == 201) {
             result = true;
             print("Successfull!");
         }
@@ -205,7 +224,7 @@ public class APIActions : MonoBehaviour {
 
             foreach (string item in keyList) {
                 result_text += item;
-                result_text += " - " + obj.GetField(item).ToString().Replace("\"", "") + "\n";
+                result_text += ": " + obj.GetField(item).ToString().Replace("\"", "") + "\n";
             }
 
             print(result_text);
@@ -216,13 +235,13 @@ public class APIActions : MonoBehaviour {
 
     }
 
-	public ReturnObject getSave() {
+	public static ReturnObject getSave() {
 		string url = "https://byteme.online/api/save/";
 		bool result = false;
 		string result_text = "";
 
 		UnityWebRequest request = UnityWebRequest.Get(url);
-		request.SetRequestHeader ("Authorization", "Token eee37ef9408de55176db375bedcf63e3f24c50f6");
+		request.SetRequestHeader ("Authorization", string.Concat ("Token ", token));
 		request.SetRequestHeader("Content-Type", "application/json");
 
 
@@ -242,22 +261,45 @@ public class APIActions : MonoBehaviour {
 		}
 
 		if (request.responseCode == 200) {
-			print(request.responseCode);
-			print(request.downloadHandler.text);
-			JSONObject obj2 = new JSONObject(request.downloadHandler.text);
-			string obj3 = obj2.GetField ("results")[0].ToString ();
-			print (obj3.ToString());
-			JSONObject obj = new JSONObject(obj3.ToString());
+			string json = request.downloadHandler.text;
+			print (json);
 
-			var items = obj.GetField ("item_list").ToDictionary();
-			print (items);
+			JSONObject obj = new JSONObject(json);
+			long count = obj.GetField("count").i;
 
-			//Michael this is causing an error 
-			/*foreach (string item in items) 
-			{
-				print (item);
-			}*/
+			if (count == 1) {
+				JSONObject saveData = obj.GetField("results");
+				print (saveData [0].ToString ());
+				JSONPlayer jsonPlayer = JsonUtility.FromJson<JSONPlayer> (saveData[0].ToString());
+				jsonPlayer.setPlayerStats (FindObjectOfType (typeof(Player)) as Player);
+
+				string formatted_time = jsonPlayer.time;
+				string[] splitted = formatted_time.Split(':');
+				int hours = int.Parse (splitted [0]) * 3600;
+				int minutes = int.Parse (splitted [1]) * 60;
+				int seconds = int.Parse (splitted [2]);
+
+				time = hours + minutes + seconds;
+
+			} else {
+				Player player = FindObjectOfType (typeof(Player)) as Player;
+				player.SetHealth (100);
+				player.SetDamage (20);
+				player.SetSpeed (20);
+				player.SetDefense (20);
+			}
 		} else {
+			print (request.responseCode);
+
+			// FOR TESTING DO NOT LEAVE IN PRODUCTION!!!!!!! (... or should we?)
+
+			Player player = FindObjectOfType (typeof(Player)) as Player;
+			player.SetHealth (100);
+			player.SetDamage (20);
+			player.SetSpeed (20);
+			player.SetDefense (20);
+
+			/*
 			print(request.responseCode);
 			print(request.downloadHandler.text);
 			JSONObject obj = new JSONObject(request.downloadHandler.text);
@@ -265,11 +307,11 @@ public class APIActions : MonoBehaviour {
 
 			foreach (string item in keyList) {
 				result_text += item;
-				result_text += " - " + obj.GetField(item).ToString().Replace("\"", "") + "\n";
+				result_text += ": " + obj.GetField(item).ToString().Replace("\"", "") + "\n";
 			}
 
 			print(result_text);
-			result = false;
+			result = false;*/
 		}
 
 		return new ReturnObject(result, result_text);
