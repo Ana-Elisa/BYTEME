@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyPatrol : MonoBehaviour {
-    public float moveSpeed;
+    public float speed;
     public bool moveRight;
     public Rigidbody2D rgb2d;
 
@@ -29,11 +29,11 @@ public class EnemyPatrol : MonoBehaviour {
         //patrols
         if (moveRight) {
             transform.localScale = new Vector3(-1f, 1f, 1f);
-            rgb2d.velocity = new Vector2(moveSpeed, rgb2d.velocity.y);
+            rgb2d.velocity = new Vector2(speed, rgb2d.velocity.y);
         }else
         {
             transform.localScale = new Vector3(1f, 1f, 1f);
-            rgb2d.velocity = new Vector2(-moveSpeed, rgb2d.velocity.y);
+            rgb2d.velocity = new Vector2(-speed, rgb2d.velocity.y);
         }
 	}
 }

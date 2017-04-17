@@ -5,8 +5,6 @@ using UnityEngine.UI;
 
 public class Player : MonoBehaviour {
 
-
-
 	public List<int> itemList = new List<int>();
 
 	//All the Health stuff
@@ -25,6 +23,9 @@ public class Player : MonoBehaviour {
 	//All the defense stuff
 	public Slider defenseSlider;
 	public int currentDefense;
+
+	//All other stuff
+	public int nextLevel;
 
 	//Set-up
 	GameObject player;
@@ -143,6 +144,16 @@ public class Player : MonoBehaviour {
 	{
 		currentDefense = amount;
 		defenseSlider.value = currentDefense;
+	}
+
+	public void SetNextLevel(int level)
+	{
+		nextLevel = level;
+	}
+
+	public void SetItemList(List<int> items)
+	{
+		itemList = items;
 	}
 
 	 void Death()

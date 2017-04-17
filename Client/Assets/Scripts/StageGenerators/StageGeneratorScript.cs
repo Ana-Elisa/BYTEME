@@ -37,7 +37,6 @@ public class StageGeneratorScript : MonoBehaviour {
 		while (stack.Count > 0) {
 			List<int> candid = new List<int> ();
 			Vector2 cur = stack.Peek ();
-			Debug.Log (cur);
 			visited.Add (cur);
 			int x = (int)cur.x;
 			int y = (int)cur.y;
@@ -58,7 +57,6 @@ public class StageGeneratorScript : MonoBehaviour {
 			} else {
 				int[] c = candid.ToArray ();
 				int dir = c [(int)(Random.value * candid.Count)];
-				Debug.Log (dir);
 				directions [x, y] = directions [x, y] | dir;
 				int opp = dir >> 2;
 				if (opp == 0) {
