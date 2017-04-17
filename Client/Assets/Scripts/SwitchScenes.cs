@@ -120,7 +120,7 @@ public class SwitchScenes : MonoBehaviour {
 		popupText = result.text;
 
 		if (status == true)
-			SceneManager.LoadScene ("Ana'sLevel");
+			SceneManager.LoadScene ("Ana'esNEWLevel");
 		else {
 			showPopup = true;
 		}

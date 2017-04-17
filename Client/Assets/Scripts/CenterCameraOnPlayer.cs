@@ -21,7 +21,7 @@ public class CenterCameraOnPlayer : MonoBehaviour {
 	// Update is called once per frame
 	void LateUpdate () {
 		if (pTransform == null) {
-			GameObject target = GameObject.Find ("Player 1(Clone)");
+			GameObject target = GameObject.FindGameObjectWithTag ("Player");
 			if (target) {
 				pTransform = target.transform;
 				LateUpdate ();
@@ -29,7 +29,7 @@ public class CenterCameraOnPlayer : MonoBehaviour {
 		} else {
 			float targetX = pTransform.position.x;
 			float targetY = pTransform.position.y;
-			if (targetX - camHWidth < leftBound) {
+			/*if (targetX - camHWidth < leftBound) {
 				targetX = leftBound + camHWidth;
 			}
 			if (targetX + camHWidth > rightBound) {
@@ -40,7 +40,7 @@ public class CenterCameraOnPlayer : MonoBehaviour {
 			}
 			if (targetY + camHHeight > topBound) {
 				targetY = topBound - camHHeight;
-			}
+			}*/
 			transform.position = (Vector3.right * targetX) + (Vector3.up * targetY) + (Vector3.back * 10);
 		}
 	}

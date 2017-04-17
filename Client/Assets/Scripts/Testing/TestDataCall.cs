@@ -18,6 +18,7 @@ public class TestDataCall : MonoBehaviour {
 			print ("posting");
 			LoadingScreen loadingScreen = FindObjectOfType (typeof(LoadingScreen)) as LoadingScreen;
 			APIActions.postSave ();
+			System.Threading.Thread.Sleep(1000);
 			loadingScreen.show = false;
 			postSave = false;
 		}
