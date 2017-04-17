@@ -23,23 +23,14 @@ public class PawsMenu : MonoBehaviour
 			Time.timeScale = 0;
 			print ("paused");
 			paused = true;
-			if (paused) 
-			{
-				pawsMenu.enabled = true;
-				Button cBtn = cont.GetComponent<Button> ();
-				Button qBtn = quit.GetComponent<Button> ();
-				//GameObject.Find("Player").GetComponent<PlayerC> ().enabled = false;
-				//GameObject.Find("Player").GetComponent<PlayerAttack> ().enabled = false;
-				cBtn.onClick.AddListener (cOnClick);
-				qBtn.onClick.AddListener (qOnClick);
-			} 
-			else if (!paused) 
-			{
-				//GameObject.Find("Player").GetComponent<PlayerC> ().enabled = true;
-				//GameObject.Find("Player").GetComponent<PlayerAttack> ().enabled = true;
-
-				pawsMenu.enabled = false;
-			}
+			pawsMenu.enabled = true;
+			GameObject.Find ("Player").GetComponent<PlayerC> ().enabled = false;
+			GameObject.Find ("Player").GetComponent<PlayerAttack> ().enabled = false;
+			Button cBtn = cont.GetComponent<Button> ();
+			Button qBtn = quit.GetComponent<Button> ();
+			cBtn.onClick.AddListener (cOnClick);
+			qBtn.onClick.AddListener (qOnClick);
+			
 		}
 	}
 
@@ -49,6 +40,8 @@ public class PawsMenu : MonoBehaviour
 		paused = false;
 		print ("resumed");
 		pawsMenu.enabled = false;
+		GameObject.Find("Player").GetComponent<PlayerC> ().enabled = true;
+		GameObject.Find("Player").GetComponent<PlayerAttack> ().enabled = true;
 	}
 
 	void qOnClick()
