@@ -50,8 +50,16 @@ public class JSONPlayer {
 		speed = player.currentSpeed;
 		defence = player.currentDefense;
 		item_list = player.itemList;
-		next_level = 1;
-		time = "00:00:00";
+		next_level = player.nextLevel;
+
+		int remainder;
+		float total_time = APIActions.time + Time.time;
+		int hours = (int)total_time / 3600;
+		remainder = (int)total_time % 3600;
+		int minutes = remainder / 60;
+		int seconds = remainder % 60;
+
+		time = (hours.ToString() + ":" + minutes.ToString() + ":" + seconds.ToString());
 	}
 
 	public void setPlayerStats(Player player) {
@@ -59,6 +67,8 @@ public class JSONPlayer {
 		player.SetDamage (attack);
 		player.SetSpeed (speed);
 		player.SetDefense (defence);
+		player.SetNextLevel (next_level);
+		player.SetItemList (item_list);
 	}
 
 	public string ToJSON() {
@@ -71,7 +81,7 @@ public class JSONPlayer {
 public class APIActions : MonoBehaviour {
 
 	private static string token;
-	private IEnumerator coroutine;
+	public static float time;
 
 	public static ReturnObject login(string username, string password) {
 		string url = "https://byteme.online/api/token/";
@@ -226,8 +236,6 @@ public class APIActions : MonoBehaviour {
     }
 
 	public static ReturnObject getSave() {
-		print (token);
-
 		string url = "https://byteme.online/api/save/";
 		bool result = false;
 		string result_text = "";
@@ -264,6 +272,15 @@ public class APIActions : MonoBehaviour {
 				print (saveData [0].ToString ());
 				JSONPlayer jsonPlayer = JsonUtility.FromJson<JSONPlayer> (saveData[0].ToString());
 				jsonPlayer.setPlayerStats (FindObjectOfType (typeof(Player)) as Player);
+
+				string formatted_time = jsonPlayer.time;
+				string[] splitted = formatted_time.Split(':');
+				int hours = int.Parse (splitted [0]) * 3600;
+				int minutes = int.Parse (splitted [1]) * 60;
+				int seconds = int.Parse (splitted [2]);
+
+				time = hours + minutes + seconds;
+
 			} else {
 				Player player = FindObjectOfType (typeof(Player)) as Player;
 				player.SetHealth (100);
