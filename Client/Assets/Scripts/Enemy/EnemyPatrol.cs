@@ -10,6 +10,7 @@ public class EnemyPatrol : MonoBehaviour {
 	private Animator anim;
 
 
+
 	public float direction = 1; //- = left + = right
 
 
@@ -17,25 +18,40 @@ public class EnemyPatrol : MonoBehaviour {
     void Start () {
         rgb2d = gameObject.GetComponent<Rigidbody2D>();
 		anim = gameObject.GetComponent<Animator> ();
+
 	}
 	
 	// Update is called once per frame
 	void Update () {
+		
 		anim.SetFloat ("Speed", Mathf.Abs (Input.GetAxis ("Horizontal")));
-		if (Input.GetAxis("Horizontal") < -0.1f) {
-			transform.localScale = new Vector3(-1, 1, 1);
-		}
-		if (Input.GetAxis ("Horizontal") > 0.1f) {
-			transform.localScale = new Vector3 (1, 1, 1);
-			
-		}
-		rgb2d.velocity = new Vector2 (direction*speed, rgb2d.velocity.y);
+		///flips animation
+		/*if (gameObject.tag.CompareTo ("batEnemy") > 0) {
+			if (Input.GetAxis ("Horizontal") < -0.1f && direction != 1) {
+				transform.localScale = new Vector3 (-transform.localScale.x, transform.localScale.y, transform.localScale.z);
+			} else if (Input.GetAxis ("Horizontal") > 0 && direction ==  1) {
+				transform.localScale = new Vector3 (transform.localScale.x, transform.localScale.y, transform.localScale.z);
+				//transform.localScale = new Vector3 (1, 1, 1);
+			}*/
+			rgb2d.velocity = new Vector2 (direction * speed, rgb2d.velocity.y);
+
 	}
 
 	public void reverse()
-	{
+	{   //change direction of block
 		direction = direction * -1;
-            rgb2d.velocity = new Vector2(-speed, rgb2d.velocity.y);
-        }
+		rgb2d.velocity = new Vector2 (-speed, rgb2d.velocity.y);
+		//change direction of sprite
+		if (gameObject.tag.CompareTo ("batEnemy") > 0) {
+			if (Input.GetAxis ("Horizontal") < -0.1f && direction != 1) {
+				transform.localScale = new Vector3 (-transform.localScale.x, transform.localScale.y, transform.localScale.z);
+			} else if (Input.GetAxis ("Horizontal") > 0 && direction == 1) {
+				transform.localScale = new Vector3 (transform.localScale.x, transform.localScale.y, transform.localScale.z);
+				//transform.localScale = new Vector3 (1, 1, 1);
+			}
+
+		}
 	}
+
+}
 

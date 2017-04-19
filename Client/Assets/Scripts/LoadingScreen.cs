@@ -10,14 +10,13 @@ public class LoadingScreen : MonoBehaviour {
 
 	void Start()
 	{
-		loadingScreen.enabled = false; 
+		loadingScreen.enabled = true; 
 	}
 
 	void Update ()
 	{
 		if (show) {
 			Time.timeScale = 0;
-			print ("loading");
 			loadingScreen.enabled = true;
 		} 
 		else 

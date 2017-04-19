@@ -166,7 +166,8 @@ public class Player : MonoBehaviour {
 
 	void PickUpItem(Collision2D other)
 	{
-		if (other.gameObject.name == "YarnBall") 
+
+		if (other.gameObject.name.Contains("YarnBall") == true) 
 		{
 			print ("YarnBall Collided");
 			Destroy (other.gameObject);
@@ -177,7 +178,7 @@ public class Player : MonoBehaviour {
 
 		}
 
-		if (other.gameObject.name == "RiceBall") 
+		if (other.gameObject.name.Contains("RiceBall") == true) 
 		{
 			print ("RiceBall Collided");
 			Destroy (other.gameObject);
@@ -187,7 +188,7 @@ public class Player : MonoBehaviour {
 			itemList.Add (2);
 		}
 
-		if (other.gameObject.name == "RiceBowl") 
+		if (other.gameObject.name.Contains("RiceBowl") == true) 
 		{
 			print ("RiceBowl Collided");
 			Destroy (other.gameObject);
@@ -197,7 +198,7 @@ public class Player : MonoBehaviour {
 			itemList.Add (3);
 		}
 
-		if (other.gameObject.name == "ChickenLeg")
+		if (other.gameObject.name.Contains("ChickenLeg") == true)
 		{
 			print ("ChickenLeg Collided");
 			Destroy (other.gameObject);
@@ -207,7 +208,7 @@ public class Player : MonoBehaviour {
 			itemList.Add (4);
 
 		}
-		if (other.gameObject.name == "TunaCan")
+		if (other.gameObject.name.Contains("TunaCan") == true)
 		{
 			print ("TunaCan Collided");
 			Destroy (other.gameObject);
@@ -217,7 +218,55 @@ public class Player : MonoBehaviour {
 			itemList.Add (5);
 
 		}
+		if (other.gameObject.name.Contains("Litter") == true)
+		{
+			print ("Litter Collided");
+			Destroy (other.gameObject);
+			AddDefense (2);
 
+			// Add item id to list
+			itemList.Add (6);
 
-	}
+		}
+
+		if (other.gameObject.name.Contains("redStocking") == true)
+		{
+			print ("Stocking Collided");
+			Destroy (other.gameObject);
+			AddSpeed(5);
+
+			// Add item id to list
+			itemList.Add (7);
+		}
+
+		if (other.gameObject.name.Contains("openBox") == true)
+        {
+            print("Box Collided");
+            Destroy(other.gameObject);
+            AddDefense(5);
+
+            // Add item id to list
+            itemList.Add(8);
+        }
+
+		if (other.gameObject.name.Contains("BlueBall") == true)
+        {
+            print("BlueBall Collided");
+            Destroy(other.gameObject);
+            AddDamage(5);
+
+            // Add item id to list
+            itemList.Add(9);
+        }
+
+		if (other.gameObject.name.Contains("CatFood") == true)
+        {
+            print("Cat Food Collided");
+            Destroy(other.gameObject);
+            AddHealth(4);
+
+            // Add item id to list
+            itemList.Add(10);
+        }
+    }
 }

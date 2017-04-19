@@ -24,8 +24,8 @@ public class PawsMenu : MonoBehaviour
 			print ("paused");
 			paused = true;
 			pawsMenu.enabled = true;
-			GameObject.Find ("Player").GetComponent<PlayerC> ().enabled = false;
-			GameObject.Find ("Player").GetComponent<PlayerAttack> ().enabled = false;
+			GameObject.FindGameObjectWithTag ("Player").GetComponent<PlayerC> ().enabled = false;
+			GameObject.FindGameObjectWithTag ("Player").GetComponent<PlayerAttack> ().enabled = false;
 			Button cBtn = cont.GetComponent<Button> ();
 			Button qBtn = quit.GetComponent<Button> ();
 			cBtn.onClick.AddListener (cOnClick);
@@ -40,8 +40,8 @@ public class PawsMenu : MonoBehaviour
 		paused = false;
 		print ("resumed");
 		pawsMenu.enabled = false;
-		GameObject.Find("Player").GetComponent<PlayerC> ().enabled = true;
-		GameObject.Find("Player").GetComponent<PlayerAttack> ().enabled = true;
+		GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerC> ().enabled = true;
+		GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerAttack> ().enabled = true;
 	}
 
 	void qOnClick()

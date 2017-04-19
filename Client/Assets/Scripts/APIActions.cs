@@ -138,7 +138,7 @@ public class APIActions : MonoBehaviour {
 
 		WWWForm userInfo = new WWWForm ();
 		userInfo.AddField ("username", username);
-		userInfo.AddField ("Email", email);
+		userInfo.AddField ("email", email);
 		userInfo.AddField ("password", password);
 
 		UnityWebRequest request = UnityWebRequest.Post (url, userInfo);
@@ -159,7 +159,8 @@ public class APIActions : MonoBehaviour {
 			return new ReturnObject (false, "Could not connect to server");
 		}
 
-		if (request.responseCode == 200 ) {
+		print (request.responseCode);
+		if (request.responseCode == 201 ) {
 			result = true;
 			result_text = "Successfull! You may now login.";
 		} else {
@@ -288,6 +289,7 @@ public class APIActions : MonoBehaviour {
 				player.SetDamage (20);
 				player.SetSpeed (20);
 				player.SetDefense (20);
+				player.SetNextLevel (1);
 			}
 		} else {
 			print (request.responseCode);

@@ -11,6 +11,16 @@ using UnityEngine.Networking;
 
 public class SwitchScenes : MonoBehaviour {
 
+	public static bool GENSTAGE = false;
+	public static bool LOADSTAGE = false;
+	public static bool GENPLAYER = false;
+	public static bool SETSTAGE = false;
+	public static bool CALLSTAGEGEN = false;
+	public static int frameCount;
+	int stageHeight, stageWidth;
+	GameObject ui;
+	public Transform prePlayer;
+
     private Button enterGameButton;
     private Button forgotPasswordButton;
     private Button newUserButton;
@@ -35,6 +45,69 @@ public class SwitchScenes : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		if (GENSTAGE && Time.frameCount == frameCount + 30) {
+			print ("Generating...");
+
+			try {
+				Player player = FindObjectOfType (typeof(Player)) as Player;
+				player.nextLevel += 1;
+				ReturnObject result = APIActions.postSave();
+				bool status = result.retStatus;
+				popupText = result.text;
+
+				if (status == false) {
+					showPopup = true;
+				}
+			} catch (Exception ex){
+				print (ex);
+			}
+
+			LoadingScreen loadingScreen = FindObjectOfType (typeof(LoadingScreen)) as LoadingScreen;
+			loadingScreen.show = true;
+
+			Time.timeScale = 0;
+
+			//SceneManager.LoadScene("Ana'esNEWLevel");
+
+			GENSTAGE = false;
+			LOADSTAGE = true;
+			frameCount = Time.frameCount;
+		}
+		if (LOADSTAGE && Time.frameCount == frameCount + 30) {
+			SceneManager.LoadScene ("Ana'esNEWLevel");
+			LOADSTAGE = false;
+			GENPLAYER = true;
+			frameCount = Time.frameCount;
+		}
+		if (GENPLAYER && Time.frameCount == frameCount + 30) {
+			print ("player time...");
+			Instantiate (prePlayer);
+
+			ui = GameObject.Find ("HUDCanvas");
+			ui.SetActive (false);
+
+			GENPLAYER = false;
+			SETSTAGE = true;
+			frameCount = Time.frameCount;
+		}
+		if (SETSTAGE && Time.frameCount == frameCount + 30) {
+			print ("Setting...");
+			Player player = FindObjectOfType (typeof(Player)) as Player;
+			stageHeight = player.nextLevel + 1;
+			stageWidth = player.nextLevel + 1;
+			print ("Width " + stageWidth + " Hight " + stageHeight);
+
+			StageGeneratorScript stageGen = FindObjectOfType (typeof(StageGeneratorScript)) as StageGeneratorScript;
+			stageGen.stageHeight = stageHeight;
+			stageGen.stageWidth = stageWidth;
+			SETSTAGE = false;
+			stageGen.GenerateStage ();
+
+			LoadingScreen loadingScreen = FindObjectOfType (typeof(LoadingScreen)) as LoadingScreen;
+			loadingScreen.show = false;
+			ui.SetActive (true);
+			Time.timeScale = 1;
+		}
        
 	}
 
@@ -96,7 +169,7 @@ public class SwitchScenes : MonoBehaviour {
 
 
             //SUBMIT POST/GET METHOD HERE>
-            registerButton.onClick.AddListener(loadLoginScreen);
+			registerButton.onClick.AddListener(createUser);
         }
         
     }
@@ -119,9 +192,11 @@ public class SwitchScenes : MonoBehaviour {
 		bool status = result.retStatus;
 		popupText = result.text;
 
-		if (status == true)
-			SceneManager.LoadScene ("Ana'esNEWLevel");
-		else {
+		if (status == true) {
+			//SceneManager.LoadScene ("Ana'esNEWLevel");
+			GENSTAGE = true;
+			frameCount = Time.frameCount;
+		} else {
 			showPopup = true;
 		}
 
@@ -170,6 +245,20 @@ public class SwitchScenes : MonoBehaviour {
     private void loadLoginScreen() {
         SceneManager.LoadScene("LoginScreen");
     }
+	private void createUser() {
+		ReturnObject result = APIActions.createUser(username, email, password);
+		bool status = result.retStatus;
+		popupText = result.text;
 
-    
+		if (status == true) {
+			GENSTAGE = true;
+			frameCount = Time.frameCount;
+			APIActions.login (username, password);
+			SceneManager.LoadScene ("Ana'esNEWLevel");
+		} else {
+			showPopup = true;
+		}
+
+	}
+		  
 }

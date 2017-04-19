@@ -207,7 +207,7 @@ PlayerSettings:
   iOSURLSchemes: []
   iOSBackgroundModes: 0
   iOSMetalForceHardShadows: 0
-  metalEditorSupport: 1
+  metalEditorSupport: 0
   metalAPIValidation: 1
   appleDeveloperTeamID: 
   iOSManualSigningProvisioningProfileID: 
