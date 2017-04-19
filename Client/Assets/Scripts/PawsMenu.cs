@@ -10,6 +10,7 @@ public class PawsMenu : MonoBehaviour
 	public Canvas pawsMenu;
 	public Button cont;
 	public Button quit;
+	public float savedTS;
 
 	void Start()
 	{
@@ -20,6 +21,8 @@ public class PawsMenu : MonoBehaviour
 	{
 		if (Input.GetKeyDown (KeyCode.Escape)) 
 		{
+			paused = true;
+			savedTS = Time.timeScale;
 			Time.timeScale = 0;
 			print ("paused");
 			paused = true;
@@ -29,14 +32,13 @@ public class PawsMenu : MonoBehaviour
 			Button cBtn = cont.GetComponent<Button> ();
 			Button qBtn = quit.GetComponent<Button> ();
 			cBtn.onClick.AddListener (cOnClick);
-			qBtn.onClick.AddListener (qOnClick);
-			
+			qBtn.onClick.AddListener (qOnClick);		
 		}
 	}
 
 	void cOnClick()
 	{
-		Time.timeScale = 1;
+		Time.timeScale = savedTS;
 		paused = false;
 		print ("resumed");
 		pawsMenu.enabled = false;
