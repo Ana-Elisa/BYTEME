@@ -109,7 +109,6 @@ public class StageGeneratorScript : MonoBehaviour {
 					//We are getting the player
 					prePlayer = GameObject.FindGameObjectWithTag ("Player");
 					//We are moving the player
-					//prePlayer.transform.position.Set(Mathf.Abs((prePlayer.transform.position.x + xoff + (roomWidth / 2))), Mathf.Abs((prePlayer.transform.position.y + yoff + (roomHeight / 2))), 0);
 					prePlayer.transform.position = (Vector3.right * (xoff + (roomWidth / 2))+ Vector3.down * (yoff + (roomHeight / 2)));
 					//Instantiate (player, transform.position + Vector3.right * (xoff + (roomWidth / 2)) + Vector3.down * (yoff + (roomHeight / 2)), Quaternion.identity);
 				} else {
@@ -121,7 +120,7 @@ public class StageGeneratorScript : MonoBehaviour {
 							Instantiate (items [choice], transform.position + Vector3.right * (xoff + (roomWidth / 2)) + Vector3.down * (yoff + (roomHeight / 2)), Quaternion.identity);
 						}
 						if (enemies.Length > 0 && Random.value < chanceToDropEnemy) {
-							int choice = (int)(Random.value * items.Length);
+							int choice = (int)(Random.value * enemies.Length);
 							Instantiate (enemies [choice], transform.position + Vector3.right * (xoff + (roomWidth / 2)) + Vector3.down * (yoff + (roomHeight / 2)), Quaternion.identity);
 						}
 					}

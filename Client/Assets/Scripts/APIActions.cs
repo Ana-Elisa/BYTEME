@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
+using System;
 
 public class ReturnObject {
 	public bool retStatus;
@@ -115,16 +116,21 @@ public class APIActions : MonoBehaviour {
 			token = obj.GetField ("token").ToString().Replace("\"", "");
 			result = true;
 		} else {
-			JSONObject obj = new JSONObject (request.downloadHandler.text);
-			List<string> keyList = obj.keys;
+			try {
+				JSONObject obj = new JSONObject (request.downloadHandler.text);
+				List<string> keyList = obj.keys;
 
-			foreach(string item in keyList) {
-				result_text += item;
-				result_text += ": " + obj.GetField (item)[0].ToString().Replace("\"", "") + "\n";
+				foreach(string item in keyList) {
+					result_text += item;
+					result_text += ": " + obj.GetField (item)[0].ToString().Replace("\"", "") + "\n";
+				}
+
+				print (result_text);
+				result = false;
+			} catch (Exception ex) {
+				result_text = request.responseCode + ": could not connect to server";
+				result = false;
 			}
-
-			print (result_text);
-			result = false;
 		}
 
 		return new ReturnObject (result, result_text);
@@ -164,16 +170,21 @@ public class APIActions : MonoBehaviour {
 			result = true;
 			result_text = "Successfull! You may now login.";
 		} else {
-			JSONObject obj = new JSONObject (request.downloadHandler.text);
-			List<string> keyList = obj.keys;
+			try{
+				JSONObject obj = new JSONObject (request.downloadHandler.text);
+				List<string> keyList = obj.keys;
 
-			foreach(string item in keyList) {
-				result_text += item;
-				result_text += ": " + obj.GetField (item)[0].ToString().Replace("\"", "") + "\n";
+				foreach(string item in keyList) {
+					result_text += item;
+					result_text += ": " + obj.GetField (item)[0].ToString().Replace("\"", "") + "\n";
+				}
+
+				print (result_text);
+				result = false;
+			} catch (Exception ex) {
+				result_text = request.responseCode + ": could not connect to server";
+				result = false;
 			}
-
-			print (result_text);
-			result = false;
 		}
 
 		return new ReturnObject (result, result_text);
@@ -219,18 +230,23 @@ public class APIActions : MonoBehaviour {
             print("Successfull!");
         }
         else {
-            print(request.responseCode);
-            print(request.downloadHandler.text);
-            JSONObject obj = new JSONObject(request.downloadHandler.text);
-            List<string> keyList = obj.keys;
+			try {
+	            print(request.responseCode);
+	            print(request.downloadHandler.text);
+	            JSONObject obj = new JSONObject(request.downloadHandler.text);
+	            List<string> keyList = obj.keys;
 
-            foreach (string item in keyList) {
-                result_text += item;
-                result_text += ": " + obj.GetField(item).ToString().Replace("\"", "") + "\n";
-            }
+	            foreach (string item in keyList) {
+	                result_text += item;
+	                result_text += ": " + obj.GetField(item).ToString().Replace("\"", "") + "\n";
+	            }
 
-            print(result_text);
-            result = false;
+	            print(result_text);
+	            result = false;
+			} catch (Exception ex) {
+				result_text = request.responseCode + ": could not connect to server";
+				result = false;
+			}
         }
 
         return new ReturnObject(result, result_text);
@@ -282,39 +298,21 @@ public class APIActions : MonoBehaviour {
 				int seconds = int.Parse (splitted [2]);
 
 				time = hours + minutes + seconds;
+				result = true;
 
 			} else {
 				Player player = FindObjectOfType (typeof(Player)) as Player;
-				player.SetHealth (100);
-				player.SetDamage (20);
-				player.SetSpeed (20);
-				player.SetDefense (20);
+				player.SetHealth (Player.defaultHealth);
+				player.SetDamage (Player.defaultDamage);
+				player.SetSpeed (Player.defaultSpeed);
+				player.SetDefense (Player.defaultDefense);
 				player.SetNextLevel (1);
+				result = true;
 			}
 		} else {
 			print (request.responseCode);
-
-			// FOR TESTING DO NOT LEAVE IN PRODUCTION!!!!!!! (... or should we?)
-
-			Player player = FindObjectOfType (typeof(Player)) as Player;
-			player.SetHealth (100);
-			player.SetDamage (20);
-			player.SetSpeed (20);
-			player.SetDefense (20);
-
-			/*
-			print(request.responseCode);
-			print(request.downloadHandler.text);
-			JSONObject obj = new JSONObject(request.downloadHandler.text);
-			List<string> keyList = obj.keys;
-
-			foreach (string item in keyList) {
-				result_text += item;
-				result_text += ": " + obj.GetField(item).ToString().Replace("\"", "") + "\n";
-			}
-
-			print(result_text);
-			result = false;*/
+			result_text = request.responseCode + ": could not connect to server";
+			result = false;
 		}
 
 		return new ReturnObject(result, result_text);

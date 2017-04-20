@@ -4,12 +4,17 @@ using UnityEngine;
 
 public class SpawnItem : MonoBehaviour {
 
-	bool firstrun = true;
+	int frame;
+
+	void Start(){
+		frame = 5;
+	}
 
 	// Use this for initialization
 	void LateUpdate () {
-		if (firstrun) {
-			firstrun = false;
+		if (frame == 0) {
+			print ("item lateupdate firstrun");
+			frame = -1;
 			Collider2D collider = gameObject.GetComponent<Collider2D> ();
 			bool check = true;
 			int iter = 100;
@@ -20,7 +25,9 @@ public class SpawnItem : MonoBehaviour {
 					results [i] = null;
 				}
 				collider.OverlapCollider (new ContactFilter2D (), results);
+
 				for (int i = 0; i < results.Length; i++) {
+					print (results [i]);
 					if (results [i] != null && results [i].gameObject.CompareTag ("Stage")) {
 						check = true;
 						transform.position = transform.position + Vector3.up * 0.1f;
@@ -32,6 +39,16 @@ public class SpawnItem : MonoBehaviour {
 			if (iter <= 0) {
 				print ("INFINITE LOOP");
 			}
+			RaycastHit2D[] cast = new RaycastHit2D[1];
+			collider.Cast (Vector2.down, cast);
+			if (cast [0] != null) {
+				transform.position = cast [0].centroid;
+			} else {
+				print ("No collisions found for dropping item");
+			}
+		}
+		if (frame > 0) {
+			frame--;
 		}
 	}
 }

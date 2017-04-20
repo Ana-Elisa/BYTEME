@@ -1,12 +1,20 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class AttackTrigger : MonoBehaviour {
 
-	public int damage = 20;
+	public Slider damageSlider;
+	public int damage;
+
+	void Start(){
+
+	}
 
 	void OnCollisionEnter2D(Collision2D col){
+
+		damage = (int)damageSlider.value;
        
 		if(col.gameObject.tag == "Enemy")
 		{

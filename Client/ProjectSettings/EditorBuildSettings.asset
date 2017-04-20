@@ -5,7 +5,7 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Test.unity
     guid: 73c34002ebbea8b47881cdc3c222f215
   - enabled: 1
@@ -17,12 +17,21 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/ForgotPasswordScreen.unity
     guid: b9c455e100f710b4799b15dc6a838686
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/PlayerHealth.unity
     guid: 070ec7e7ac00d5e438064dff15a1e5d7
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Ana'sLevel.unity
     guid: 7df9d65f43a97d648ab584d7fbcf2fe4
   - enabled: 1
     path: Assets/Scenes/Ana'esNEWLevel.unity
-    guid: 00000000000000000000000000000000
+    guid: b37b110150c66f343a3dc47bcbb0b6d9
+  - enabled: 1
+    path: Assets/Scenes/GameOver.unity
+    guid: 41605ae5ac5b7a140b453852d86b43b4
+  - enabled: 1
+    path: Assets/Scenes/GameOver.unity
+    guid: 41605ae5ac5b7a140b453852d86b43b4
+  - enabled: 0
+    path: Assets/Scenes/Test.unity
+    guid: 73c34002ebbea8b47881cdc3c222f215

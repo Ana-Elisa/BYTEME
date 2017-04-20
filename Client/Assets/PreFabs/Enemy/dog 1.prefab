@@ -94,9 +94,9 @@ Rigidbody2D:
   m_AngularDrag: 0
   m_GravityScale: 1
   m_Material: {fileID: 0}
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
 --- !u!58 &58224277264819936
 CircleCollider2D:
@@ -125,7 +125,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.0033861399, y: -0.0033233985}
+  m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -180,8 +180,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 562ac6bd602112841a8ce28d9bce9afa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyMaxHealth: 20
-  enemyCurrentHealth: 20
+  enemyMaxHealth: 50
+  enemyCurrentHealth: 50
   deathEffect: {fileID: 0}
 --- !u!114 &114710974449845578
 MonoBehaviour:
@@ -206,10 +206,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13194f767f7e44145b6ea903cd6062ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  turnChance: 0.5
   speed: 2
   moveRight: 0
   rgb2d: {fileID: 50083480464754254}
   nose: {fileID: 58224277264819936}
+  colliding: 0
+  xPos: 0
   direction: 1
 --- !u!114 &114977195998208244
 MonoBehaviour:
@@ -222,7 +225,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bac1d232b1f9e48c2aabfefa0ea65b95, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  knockback: 0
+  knockback: 3
   knockbackLength: 0.2
   knockbackCount: 0.2
   knockFromRight: 0

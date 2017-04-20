@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 4293835259458080}
   - component: {fileID: 58956627322248366}
   - component: {fileID: 114231632576082226}
+  - component: {fileID: 61283197551888110}
   m_Layer: 0
   m_Name: batNose
   m_TagString: Untagged
@@ -94,9 +95,9 @@ Rigidbody2D:
   m_AngularDrag: 0
   m_GravityScale: 0
   m_Material: {fileID: 0}
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
 --- !u!58 &58956627322248366
 CircleCollider2D:
@@ -104,15 +105,15 @@ CircleCollider2D:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1512103269364484}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.2, y: 0.03}
+  m_Offset: {x: -0.19748515, y: 0.015190595}
   serializedVersion: 2
-  m_Radius: 0.03
+  m_Radius: 0.10898281
 --- !u!61 &61118616617637698
 BoxCollider2D:
   m_ObjectHideFlags: 1
@@ -137,6 +138,31 @@ BoxCollider2D:
   m_AutoTiling: 0
   serializedVersion: 2
   m_Size: {x: 0.3, y: 0.2}
+  m_EdgeRadius: 0
+--- !u!61 &61283197551888110
+BoxCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1512103269364484}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.14208758, y: 0.013575122}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.041851737, y: 0.22744921}
   m_EdgeRadius: 0
 --- !u!95 &95330881001880344
 Animator:
@@ -181,10 +207,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13194f767f7e44145b6ea903cd6062ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  turnChance: 0.5
   speed: 2
   moveRight: 0
   rgb2d: {fileID: 50866989278082570}
-  nose: {fileID: 0}
+  nose: {fileID: 58956627322248366}
+  colliding: 0
+  xPos: 0
   direction: 1
 --- !u!114 &114231632576082226
 MonoBehaviour:
@@ -197,7 +226,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b963934db8429794b97409d1623f55ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  parent: {fileID: 0}
+  parent: {fileID: 1634225285348724}
 --- !u!114 &114547927710084458
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -224,8 +253,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 562ac6bd602112841a8ce28d9bce9afa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyMaxHealth: 20
-  enemyCurrentHealth: 20
+  enemyMaxHealth: 30
+  enemyCurrentHealth: 30
   deathEffect: {fileID: 0}
 --- !u!212 &212994046638724536
 SpriteRenderer:

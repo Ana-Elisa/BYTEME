@@ -20,11 +20,14 @@ public class SwitchScenes : MonoBehaviour {
 	int stageHeight, stageWidth;
 	GameObject ui;
 	public Transform prePlayer;
-
+	private Button backButton;
     private Button enterGameButton;
     private Button forgotPasswordButton;
     private Button newUserButton;
     private Button submitButton;
+	private Button playAgainButton;
+	private Button leaderBoardButton;
+	private Button quitButton;
     private InputField usernameInputField;
     private InputField passwordInputField;
     private InputField emailInputField;
@@ -34,8 +37,8 @@ public class SwitchScenes : MonoBehaviour {
     private Button registerButton;
 	private string token; 
    
-	private bool showPopup = false;
-	string popupText = "";
+	public static bool showPopup = false;
+	public static string popupText = "";
 
 	// Use this for initialization
 	void Start () {
@@ -156,22 +159,35 @@ public class SwitchScenes : MonoBehaviour {
 			newUserButton.onClick.AddListener (loadNewUserScreen);
 
 
+		} else if (scene.name == "NewUserScreen") {
+			registerButton = GameObject.Find ("Register").GetComponent<Button> ();
+			passwordInputField = GameObject.Find ("PasswordInputField").GetComponent<InputField> ();
+			passwordInputField.onEndEdit.AddListener (delegate {
+				UpdatePassword (passwordInputField.text);
+			});
+			usernameInputField = GameObject.Find ("UsernameInputField").GetComponent<InputField> ();
+			usernameInputField.onEndEdit.AddListener (delegate {
+				UpdateUserName (usernameInputField.text);
+			});
+			//could make these into call methods..
+			emailInputField = GameObject.Find ("EmailInputField").GetComponent<InputField> ();
+			emailInputField.onEndEdit.AddListener (delegate {
+				UpdateEmail (emailInputField.text);
+			});
+			backButton = GameObject.Find ("BackButton").GetComponent<Button> ();
+			backButton.onClick.AddListener (loadLoginScreen);
+
+			//SUBMIT POST/GET METHOD HERE>
+			registerButton.onClick.AddListener (createUser);
+		} else if (scene.name == "GameOver") {
+			playAgainButton = GameObject.Find ("PlayAgain").GetComponent<Button> ();
+			leaderBoardButton = GameObject.Find ("Leaderboards").GetComponent <Button> ();
+			quitButton = GameObject.Find ("Quit").GetComponent<Button> ();
+
+			playAgainButton.onClick.AddListener (playAgain);
+			leaderBoardButton.onClick.AddListener (leaderboard);
+			quitButton.onClick.AddListener (quit);
 		}
-        else if (scene.name == "NewUserScreen") {
-            registerButton = GameObject.Find("Register").GetComponent<Button>();
-            passwordInputField = GameObject.Find("PasswordInputField").GetComponent<InputField>();
-            passwordInputField.onEndEdit.AddListener(delegate { UpdatePassword(passwordInputField.text); });
-            usernameInputField = GameObject.Find("UsernameInputField").GetComponent<InputField>();
-            usernameInputField.onEndEdit.AddListener(delegate { UpdateUserName(usernameInputField.text); });
-            //could make these into call methods..
-            emailInputField = GameObject.Find("EmailInputField").GetComponent<InputField>();
-            emailInputField.onEndEdit.AddListener(delegate { UpdateEmail(emailInputField.text); });
-
-
-            //SUBMIT POST/GET METHOD HERE>
-			registerButton.onClick.AddListener(createUser);
-        }
-        
     }
     private void UpdateEmail(string arg0) {
         email = arg0;
@@ -201,7 +217,46 @@ public class SwitchScenes : MonoBehaviour {
 		}
 
     }
-		
+
+	void accessData(JSONObject obj){
+		token = obj.GetField ("token").ToString();
+	
+	}
+    private void loadForgotPasswordScreen() {
+		Application.OpenURL ("https://byteme.online/password_reset/");
+        //SceneManager.LoadScene("ForgotPasswordScreen");
+    }
+    private void loadNewUserScreen() {
+        SceneManager.LoadScene("NewUserScreen");
+    }
+    private void loadLoginScreen() {
+        SceneManager.LoadScene("LoginScreen");
+    }
+	private void createUser() {
+		ReturnObject result = APIActions.createUser(username, email, password);
+		bool status = result.retStatus;
+		popupText = result.text;
+
+		if (status == true) {
+			GENSTAGE = true;
+			frameCount = Time.frameCount;
+			APIActions.login (username, password);
+		} else {
+			showPopup = true;
+		}
+
+	}
+	private void playAgain() {
+		GENSTAGE = true;
+		frameCount = Time.frameCount;
+	}
+	private void leaderboard() {
+		Application.OpenURL ("https://byteme.online/charts/");
+	}
+	private void quit() {
+		Application.Quit ();
+	}
+
 	void OnGUI()
 	{
 		if (showPopup)
@@ -227,36 +282,6 @@ public class SwitchScenes : MonoBehaviour {
 		{
 			showPopup = false;
 			// you may put other code to run according to your game too
-		}
-
-	}
-
-	void accessData(JSONObject obj){
-		token = obj.GetField ("token").ToString();
-	
-	}
-    private void loadForgotPasswordScreen() {
-		Application.OpenURL ("https://byteme.online/password_reset/");
-        //SceneManager.LoadScene("ForgotPasswordScreen");
-    }
-    private void loadNewUserScreen() {
-        SceneManager.LoadScene("NewUserScreen");
-    }
-    private void loadLoginScreen() {
-        SceneManager.LoadScene("LoginScreen");
-    }
-	private void createUser() {
-		ReturnObject result = APIActions.createUser(username, email, password);
-		bool status = result.retStatus;
-		popupText = result.text;
-
-		if (status == true) {
-			GENSTAGE = true;
-			frameCount = Time.frameCount;
-			APIActions.login (username, password);
-			SceneManager.LoadScene ("Ana'esNEWLevel");
-		} else {
-			showPopup = true;
 		}
 
 	}

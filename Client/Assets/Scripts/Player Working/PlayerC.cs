@@ -20,6 +20,10 @@ public class PlayerC : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
+		if (GetComponent<Player> ().newSpeed.Equals (0) == false) {
+			speed = GetComponent<Player> ().newSpeed;
+		}
+
         anim.SetBool("Grounded",grounded);
         anim.SetFloat("Speed", Mathf.Abs(Input.GetAxis("Horizontal")));
 
