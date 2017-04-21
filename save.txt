@@ -1,0 +1,200 @@
+{
+    "item_list": [3,8,5],
+    "attack": 20,
+    "defence": 80,
+    "speed": 45,
+    "health": 95,
+    "total_health": 100,
+    "next_level": 6,
+    "time": "17:45:56"
+};
+{
+    "item_list": [3,9,5,6,2],
+    "attack": 45,
+    "defence": 25,
+    "speed": 10,
+    "health": 15,
+    "total_health": 100,
+    "next_level": 5,
+    "time": "14:20:20"
+};
+{
+    "item_list": [1,2,3,4,5,6,7],
+    "attack": 56,
+    "defence": 70,
+    "speed": 100,
+    "health": 100,
+    "total_health": 100,
+    "next_level": 2,
+    "time": "02:02:02"
+};
+{
+    "item_list": [1,2,3,4,5,6,7,8,9,10],
+    "attack": 15,
+    "defence": 15,
+    "speed": 15,
+    "health": 23,
+    "total_health": 100,
+    "next_level": 13,
+    "time": "04:04:04"
+};
+{
+    "item_list": [5],
+    "attack": 15,
+    "defence": 5,
+    "speed": 5,
+    "health": 5,
+    "total_health": 100,
+    "next_level": 5,
+    "time": "05:55:50"
+};
+{
+    "item_list": [6,7,8],
+    "attack": 67,
+    "defence": 56,
+    "speed": 34,
+    "health": 67,
+    "total_health": 100,
+    "next_level": 10,
+    "time": "10:57:34"
+};
+{
+    "item_list": [3,4,5,6,2],
+    "attack": 10,
+    "defence": 23,
+    "speed": 45,
+    "health": 45,
+    "total_health": 100,
+    "next_level": 4,
+    "time": "21:46:57"
+};
+{
+    "item_list": [1,2,3,4],
+    "attack": 45,
+    "defence": 87,
+    "speed": 67,
+    "health": 34,
+    "total_health": 100,
+    "next_level": 5,
+    "time": "23:45:67"
+};
+{
+    "item_list": [6,7,5],
+    "attack": 23,
+    "defence": 45,
+    "speed": 67,
+    "health": 98,
+    "total_health": 100,
+    "next_level": 7,
+    "time": "14:12:13"
+};
+{
+    "item_list": [5,9,10,2],
+    "attack": 99,
+    "defence": 99,
+    "speed": 99,
+    "health": 99,
+    "total_health": 100,
+    "next_level": 15,
+    "time": "01:01:01"
+};
+{
+    "item_list": [2,3,4,5],
+    "attack": 45,
+    "defence": 45,
+    "speed": 45,
+    "health": 34,
+    "total_health": 100,
+    "next_level": 7,
+    "time": "06:45:26"
+};
+{
+    "item_list": [3],
+    "attack": 11,
+    "defence": 12,
+    "speed": 34,
+    "health": 23,
+    "total_health": 100,
+    "next_level": 5,
+    "time": "00:05:01"
+};
+{
+    "item_list": [2,6,7],
+    "attack": 14,
+    "defence": 34,
+    "speed": 23,
+    "health": 67,
+    "total_health": 100,
+    "next_level": 6,
+    "time": "05:59:05"
+};
+{
+    "item_list": [4],
+    "attack": 35,
+    "defence": 23,
+    "speed": 13,
+    "health": 67,
+    "total_health": 100,
+    "next_level": 6,
+    "time": "19:19:56"
+};
+{
+    "item_list": [7,8,9,3,4,5],
+    "attack": 35,
+    "defence": 56,
+    "speed": 44,
+    "health": 100,
+    "total_health": 100,
+    "next_level": 9,
+    "time": "09:09:09"
+};
+{
+    "item_list": [10,1,2,3,4,6],
+    "attack": 100,
+    "defence": 99,
+    "speed": 100,
+    "health": 100,
+    "total_health": 100,
+    "next_level": 10,
+    "time": "10:10:10"
+};
+{
+    "item_list": [1,2,3],
+    "attack": 12,
+    "defence": 13,
+    "speed": 14,
+    "health": 15,
+    "total_health": 100,
+    "next_level": 10,
+    "time": "09:56:23"
+};
+{
+    "item_list": [4,5,6],
+    "attack": 67,
+    "defence": 45,
+    "speed": 68,
+    "health": 23,
+    "total_health": 100,
+    "next_level": 15,
+    "time": "05:06:34"
+};
+{
+    "item_list": [7,8,9],
+    "attack": 89,
+    "defence": 98,
+    "speed": 45,
+    "health": 34,
+    "total_health": 100,
+    "next_level": 3,
+    "time": "23:45:59"
+};
+{
+    "item_list": [10],
+    "attack": 10,
+    "defence": 10,
+    "speed": 10,
+    "health": 100,
+    "total_health": 100,
+    "next_level": 2,
+    "time": "02:02:02"
+};
