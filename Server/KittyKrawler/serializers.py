@@ -19,7 +19,7 @@ class SaveSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = GameSave
-        fields = ('user_name', 'item_list', 'attack', 'defence', 'speed', 'health', 'total_health', 'next_level', 'time')
+        fields = ('user_name', 'kill_counter', 'item_list', 'attack', 'defence', 'speed', 'health', 'total_health', 'next_level', 'time')
 
     def create(self, validated_data):
         item_list = validated_data.pop('save_items')

@@ -9,12 +9,12 @@ def index(request):
 def charts(request):
     save_queryset = GameSave.objects.all()
 
-    save_unpack = [(save.user.username, len(save.save_items.all()), save.attack, save.defence, save.speed,
-                    save.health, save.total_health, save.next_level, save.time)
+    save_unpack = [(save.user.username, save.kill_counter, len(save.save_items.all()), save.attack, save.defence,
+                    save.speed, save.health, save.total_health, save.next_level, save.time)
                    for save in save_queryset]
 
     save_sorted = sorted(save_unpack,
-                         key=lambda s: ((s[1] + s[2] + s[3] + s[4] + s[5] + s[6]) * s[7]) - (s[8].total_seconds()/1000),
+                         key=lambda s: ((s[1] + s[2] + s[3] + s[4] + s[5] + s[6] + s[7]) * s[8]) - (s[9].total_seconds()/1000),
                          reverse=True)
 
     leaderboard = save_sorted[0:11]
