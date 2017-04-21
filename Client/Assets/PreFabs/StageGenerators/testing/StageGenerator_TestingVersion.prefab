@@ -1,0 +1,76 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &100100000
+Prefab:
+  m_ObjectHideFlags: 1
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications: []
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 1129544734895320}
+  m_IsPrefabParent: 1
+--- !u!1 &1129544734895320
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4412342177227034}
+  - component: {fileID: 114164887265786732}
+  m_Layer: 0
+  m_Name: StageGenerator_TestingVersion
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4412342177227034
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1129544734895320}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -9.76, y: 7.93, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114164887265786732
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1129544734895320}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 15b75be92a1e09c48b24ef1853c25f67, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  roomGenerators:
+  - {fileID: 4011983144581486, guid: bbaa370e29ec43b42b6fb057d436c441, type: 2}
+  - {fileID: 4803855938353076, guid: 580b89fb029489c458d171f3e6d88804, type: 2}
+  - {fileID: 4867773349718054, guid: bb1be2112947aae42abe87dad9020fcf, type: 2}
+  - {fileID: 4819078643328268, guid: 08a131d58890cdb4782b243778cbbed2, type: 2}
+  - {fileID: 4185238740590606, guid: a57377c73dafe214e92f60b188f45f7d, type: 2}
+  - {fileID: 4494702640234662, guid: 1ccfe60720d947f4086b63dba89a7f4c, type: 2}
+  - {fileID: 4616056300242144, guid: db44680f2b780f64d9a49b2d46823503, type: 2}
+  - {fileID: 4856165587466850, guid: 9bb9088bd1607ac469a0a21336ab5222, type: 2}
+  - {fileID: 4891339010615026, guid: f6b55e79760692f4db4ee819f89cb1fc, type: 2}
+  - {fileID: 4610976419142628, guid: f2b3bfd16795cd84783dbd4f44fb496f, type: 2}
+  - {fileID: 4235250427395438, guid: 59a43e99acedcff40afddfae854a0758, type: 2}
+  - {fileID: 4882745027866204, guid: 9980e9d5061a64e4cb4cc46fc0f17974, type: 2}
+  - {fileID: 4218731041284932, guid: 0e9001ede999b1942a15fd153a735cfb, type: 2}
+  - {fileID: 4290438924730684, guid: 245639809be4f4342bd7e9b3703d8c99, type: 2}
+  - {fileID: 4572671696711986, guid: 621a8b3a42b2fd84f948339ee8464d8c, type: 2}
+  - {fileID: 4844497048922988, guid: c3da2b7fc2e484449a332e2da415d92d, type: 2}
+  player: {fileID: 4658338550240528, guid: a5d25b4b5b12dd74182ae9509c852239, type: 2}
+  exit: {fileID: 4781104634469732, guid: dc5498801d2687f4f9202c1dfbaa102d, type: 2}
+  stageWidth: 8
+  stageHeight: 8
+  roomWidth: 2
+  roomHeight: 2
