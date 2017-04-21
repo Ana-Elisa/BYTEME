@@ -2842,7 +2842,7 @@
 	}
 
 		table tbody tr:nth-child(2n + 1) {
-			background-color: rgba(149, 182, 224, 0.075);
+			background-color: rgb(158, 209, 239);
 		}
 
 	table th {
