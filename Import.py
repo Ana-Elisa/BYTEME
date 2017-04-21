@@ -4,12 +4,12 @@ import json
 from random import randint
 
 TOP_SECRET = "Mcjdan,dryd.ugjtgo.oekrpat!"
-#user_url = "https://byteme.online/api/user/"
-user_url = "http://127.0.0.1:8000/api/user/"
-#token_url = "https://byteme.online/api/token/"
-token_url = "http://127.0.0.1:8000/api/token/"
-#save_url = "https://byteme.online/api/save/"
-save_url = "http://127.0.0.1:8000/api/save/"
+user_url = "https://byteme.online/api/user/"
+#user_url = "http://127.0.0.1:8000/api/user/"
+token_url = "https://byteme.online/api/token/"
+#token_url = "http://127.0.0.1:8000/api/token/"
+save_url = "https://byteme.online/api/save/"
+#save_url = "http://127.0.0.1:8000/api/save/"
 
 if len(sys.argv) != 3:
     print("Missing required parameter: \n"
