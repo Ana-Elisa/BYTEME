@@ -7,14 +7,14 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from Auth.serializers import UserSerializer
 
-from.permissions import IsStaffOrPOST
+from.permissions import IsAdminOrClient
 
 User._meta.get_field('email')._unique = True
 
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
-    permission_classes = (IsStaffOrPOST, )
+    permission_classes = (IsAdminOrClient, )
 
 
 class ObtainAuthToken(viewsets.GenericViewSet):
