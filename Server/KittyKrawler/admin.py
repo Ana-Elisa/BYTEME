@@ -3,7 +3,7 @@ from .models import GameSave, Leaderboard, Item
 
 class GameSaveAdmin(admin.ModelAdmin):
     model = GameSave
-    list_display = ('user', 'get_item_list', 'attack', 'defence', 'speed', 'health', 'total_health', 'next_level',
+    list_display = ('user', 'get_item_list', 'kill_counter', 'attack', 'defence', 'speed', 'health', 'total_health', 'next_level',
                     'time', 'created', 'current')
 
     def get_item_list(self, obj):
