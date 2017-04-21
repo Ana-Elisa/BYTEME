@@ -1,4 +1,5 @@
 {
+    "kill_counter": 11,
     "item_list": [3,8,5],
     "attack": 20,
     "defence": 80,
@@ -9,6 +10,7 @@
     "time": "17:45:56"
 };
 {
+    "kill_counter": 15,
     "item_list": [3,9,5,6,2],
     "attack": 45,
     "defence": 25,
@@ -19,6 +21,7 @@
     "time": "14:20:20"
 };
 {
+    "kill_counter": 29,
     "item_list": [1,2,3,4,5,6,7],
     "attack": 56,
     "defence": 70,
@@ -29,6 +32,7 @@
     "time": "02:02:02"
 };
 {
+    "kill_counter": 19,
     "item_list": [1,2,3,4,5,6,7,8,9,10],
     "attack": 15,
     "defence": 15,
@@ -39,6 +43,7 @@
     "time": "04:04:04"
 };
 {
+    "kill_counter": 4,
     "item_list": [5],
     "attack": 15,
     "defence": 5,
@@ -49,6 +54,7 @@
     "time": "05:55:50"
 };
 {
+    "kill_counter": 7,
     "item_list": [6,7,8],
     "attack": 67,
     "defence": 56,
@@ -59,6 +65,7 @@
     "time": "10:57:34"
 };
 {
+    "kill_counter": 11,
     "item_list": [3,4,5,6,2],
     "attack": 10,
     "defence": 23,
@@ -69,6 +76,7 @@
     "time": "21:46:57"
 };
 {
+    "kill_counter": 8,
     "item_list": [1,2,3,4],
     "attack": 45,
     "defence": 87,
@@ -79,6 +87,7 @@
     "time": "23:45:67"
 };
 {
+    "kill_counter": 9,
     "item_list": [6,7,5],
     "attack": 23,
     "defence": 45,
@@ -89,6 +98,7 @@
     "time": "14:12:13"
 };
 {
+    "kill_counter": 44,
     "item_list": [5,9,10,2],
     "attack": 99,
     "defence": 99,
@@ -99,6 +109,7 @@
     "time": "01:01:01"
 };
 {
+    "kill_counter": 16,
     "item_list": [2,3,4,5],
     "attack": 45,
     "defence": 45,
@@ -109,6 +120,7 @@
     "time": "06:45:26"
 };
 {
+    "kill_counter": 0,
     "item_list": [3],
     "attack": 11,
     "defence": 12,
@@ -119,6 +131,7 @@
     "time": "00:05:01"
 };
 {
+    "kill_counter": 11,
     "item_list": [2,6,7],
     "attack": 14,
     "defence": 34,
@@ -129,6 +142,7 @@
     "time": "05:59:05"
 };
 {
+    "kill_counter": 37,
     "item_list": [4],
     "attack": 35,
     "defence": 23,
@@ -139,6 +153,7 @@
     "time": "19:19:56"
 };
 {
+    "kill_counter": 32,
     "item_list": [7,8,9,3,4,5],
     "attack": 35,
     "defence": 56,
@@ -149,6 +164,7 @@
     "time": "09:09:09"
 };
 {
+    "kill_counter": 21,
     "item_list": [10,1,2,3,4,6],
     "attack": 100,
     "defence": 99,
@@ -159,6 +175,7 @@
     "time": "10:10:10"
 };
 {
+    "kill_counter": 31,
     "item_list": [1,2,3],
     "attack": 12,
     "defence": 13,
@@ -169,6 +186,7 @@
     "time": "09:56:23"
 };
 {
+    "kill_counter": 5,
     "item_list": [4,5,6],
     "attack": 67,
     "defence": 45,
@@ -179,6 +197,7 @@
     "time": "05:06:34"
 };
 {
+    "kill_counter": 2,
     "item_list": [7,8,9],
     "attack": 89,
     "defence": 98,
@@ -189,6 +208,7 @@
     "time": "23:45:59"
 };
 {
+    "kill_counter": 26,
     "item_list": [10],
     "attack": 10,
     "defence": 10,
