@@ -384,6 +384,7 @@ GameObject:
   - component: {fileID: 114836089813517272}
   - component: {fileID: 114156617123717492}
   - component: {fileID: 114829525582176120}
+  - component: {fileID: 114841074356945158}
   m_Layer: 0
   m_Name: Player 1
   m_TagString: Player
@@ -1211,10 +1212,12 @@ MonoBehaviour:
   currentDamage: 0
   speedSlider: {fileID: 114572880941678356}
   currentSpeed: 0
+  newSpeed: 0
   defenseSlider: {fileID: 114320228343921658}
   currentDefense: 0
   nextLevel: 0
   damage: 10
+  score: 0
 --- !u!114 &114836089813517272
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1228,6 +1231,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackTrigger: {fileID: 61462157407169580}
   damage: 0
+--- !u!114 &114841074356945158
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1731250519181526}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e52abe1d3d3578c4a9f9b69043a70403, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  killCounter: 0
 --- !u!114 &114977796682721522
 MonoBehaviour:
   m_ObjectHideFlags: 1

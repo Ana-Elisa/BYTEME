@@ -21,20 +21,8 @@ public class LoadingScreen : MonoBehaviour {
 		} 
 		else 
 		{
-			Time.timeScale = 1;
+			//Time.timeScale = 1;
 			loadingScreen.enabled = false;
 		}
 	}
-
-	/*public void show() {
-		Time.timeScale = 0;
-		print ("loading");
-		loadingScreen.enabled = true;
-	}*/
-
-	public void hide() {
-		Time.timeScale = 1;
-		loadingScreen.enabled = false;
-	}
-		
 }

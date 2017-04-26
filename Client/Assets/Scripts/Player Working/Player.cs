@@ -34,6 +34,7 @@ public class Player : MonoBehaviour {
 
 	//All other stuff
 	public int nextLevel;
+	public int killCounter = 0;
 
 	//Set-up
 	GameObject player;
@@ -71,10 +72,15 @@ public class Player : MonoBehaviour {
 			//print (newSpeed);
 		}
 
+		//score = (int)GetComponent<EnemyHealthManager> ().scoreCnt;
+		//print (score);
+
 	}
 	
 	// Update is called once per frame
 	void Update () {
+
+		//score = (int)GetComponent<EnemyHealthManager> ().scoreCnt;
 		
 	}
 
@@ -142,19 +148,18 @@ public class Player : MonoBehaviour {
 	public void AddSpeed(int amount)
 	{
 		currentSpeed = currentSpeed + amount;
-		speedSlider.value = currentSpeed;
 
-		if (currentSpeed > 0 && currentSpeed != 100) {
+		if (currentSpeed > 0 && currentSpeed < 100) 
+		{
+			speedSlider.value = currentSpeed;
+
 			int speedo;
 			speedo = (int)GetComponent<PlayerC> ().speed;
-			//print (speedo); //This confirmed the value gotten
 
 			int addSpeed;
 			addSpeed = (int)((speedSlider.value / 100) * currentSpeed);
-			//print (addSpeed);
 
 			newSpeed = speedo + addSpeed;
-			//print (newSpeed);
 		}
 
 		if (currentSpeed > 100) {
@@ -201,6 +206,11 @@ public class Player : MonoBehaviour {
 	public void SetNextLevel(int level)
 	{
 		nextLevel = level;
+	}
+
+	public void SetKillCounter(int score)
+	{
+		killCounter = score;
 	}
 
 	public void SetItemList(List<int> items)

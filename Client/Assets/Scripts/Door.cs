@@ -32,7 +32,7 @@ public class Door : MonoBehaviour {
 	{
 		if (other.gameObject.tag == "Stage") 
 		{
-			print ("Door collided with stage");
+			//print ("Door collided with stage");
 			DestroyImmediate (other.gameObject);
 		}
 	}
@@ -42,6 +42,15 @@ public class Door : MonoBehaviour {
 		if (other.gameObject.tag == "Player") {
 
 			print ("inside the trigger method eyyyyyyylmaaooooo booiiiiii");
+
+			other.GetComponent<Rigidbody2D> ().constraints = RigidbodyConstraints2D.FreezePositionX;
+			other.GetComponent<Rigidbody2D> ().constraints = RigidbodyConstraints2D.FreezePositionY;
+			other.GetComponent<Rigidbody2D> ().constraints = RigidbodyConstraints2D.FreezeAll;
+			other.GetComponent<Rigidbody2D> ().gravityScale = 0;
+			other.GetComponent<PlayerC> ().enabled = false;
+			other.GetComponent<PlayerAttack> ().enabled = false;
+
+			//print ("Player should have froze");
 
 			SwitchScenes.GENSTAGE = true;
 			SwitchScenes.frameCount = Time.frameCount;

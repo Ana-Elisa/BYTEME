@@ -12,6 +12,7 @@ public class StageGeneratorScript : MonoBehaviour {
 	public GameObject prePlayer;
 	public Transform player;
 	public Transform exit;
+	public Transform backgroundTile;
 	public int stageWidth = 4;
 	public int stageHeight = 4;
 	public float roomWidth = 10f;
@@ -129,6 +130,11 @@ public class StageGeneratorScript : MonoBehaviour {
 			}
 			xoff = 0f;
 			yoff += roomHeight;
+		}
+		for (float y = 0f; y > -stageHeight * roomHeight; y -= 8f) {
+			for (float x = 0f; x < stageWidth * roomWidth; x += 8f) {
+				Instantiate (backgroundTile, new Vector3 (x, y, 0), Quaternion.identity);
+			}
 		}
 
 		Destroy (gameObject);

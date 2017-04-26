@@ -35,7 +35,9 @@ public class SwitchScenes : MonoBehaviour {
     private String password = "";
     private String email = "";
     private Button registerButton;
-	private string token; 
+	private string token;
+	private bool fromHub = false;
+
    
 	public static bool showPopup = false;
 	public static string popupText = "";
@@ -53,7 +55,11 @@ public class SwitchScenes : MonoBehaviour {
 
 			try {
 				Player player = FindObjectOfType (typeof(Player)) as Player;
-				player.nextLevel += 1;
+				if(SceneManager.GetActiveScene().name == "HUBWorld"){
+					fromHub = true;
+				}else{
+					player.nextLevel += 1;
+				}
 				ReturnObject result = APIActions.postSave();
 				bool status = result.retStatus;
 				popupText = result.text;
@@ -96,19 +102,25 @@ public class SwitchScenes : MonoBehaviour {
 		if (SETSTAGE && Time.frameCount == frameCount + 30) {
 			print ("Setting...");
 			Player player = FindObjectOfType (typeof(Player)) as Player;
-			stageHeight = player.nextLevel + 1;
-			stageWidth = player.nextLevel + 1;
-			print ("Width " + stageWidth + " Hight " + stageHeight);
+			if (player.nextLevel == 1 && !fromHub) {
+				SceneManager.LoadScene ("HUBWorld"); 
+			} else {
+				stageHeight = player.nextLevel + 1;
+				stageWidth = player.nextLevel + 1;
+				print ("Width " + stageWidth + " Hight " + stageHeight);
 
-			StageGeneratorScript stageGen = FindObjectOfType (typeof(StageGeneratorScript)) as StageGeneratorScript;
-			stageGen.stageHeight = stageHeight;
-			stageGen.stageWidth = stageWidth;
-			SETSTAGE = false;
-			stageGen.GenerateStage ();
+				StageGeneratorScript stageGen = FindObjectOfType (typeof(StageGeneratorScript)) as StageGeneratorScript;
+				stageGen.stageHeight = stageHeight;
+				stageGen.stageWidth = stageWidth;
+				SETSTAGE = false;
+				stageGen.GenerateStage ();
+				fromHub = false;
+                ui.SetActive(true);
+			}
 
 			LoadingScreen loadingScreen = FindObjectOfType (typeof(LoadingScreen)) as LoadingScreen;
 			loadingScreen.show = false;
-			ui.SetActive (true);
+			//ui.SetActive (true);
 			Time.timeScale = 1;
 		}
        
@@ -231,7 +243,7 @@ public class SwitchScenes : MonoBehaviour {
     }
     private void loadLoginScreen() {
         SceneManager.LoadScene("LoginScreen");
-    }
+	}
 	private void createUser() {
 		ReturnObject result = APIActions.createUser(username, email, password);
 		bool status = result.retStatus;

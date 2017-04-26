@@ -15,6 +15,8 @@ public class PawsMenu : MonoBehaviour
 	void Start()
 	{
 		pawsMenu.enabled = false; 
+
+
 	}
 
 	void Update ()
@@ -32,7 +34,7 @@ public class PawsMenu : MonoBehaviour
 			Button cBtn = cont.GetComponent<Button> ();
 			Button qBtn = quit.GetComponent<Button> ();
 			cBtn.onClick.AddListener (cOnClick);
-			qBtn.onClick.AddListener (qOnClick);		
+			qBtn.onClick.AddListener (qOnClick);
 		}
 	}
 
@@ -50,5 +52,18 @@ public class PawsMenu : MonoBehaviour
 	{
 		Application.Quit ();
 	}
+
+	/*void Update()
+	{
+		if (Input.GetKeyDown(KeyCode.Escape))
+		{
+			StartCoroutine (PauseGame ());
+		}
+	}
+
+	IEnumerator PauseGame()
+	{
+		
+	}*/
 		
 }

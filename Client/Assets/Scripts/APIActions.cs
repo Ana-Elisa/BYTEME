@@ -40,6 +40,9 @@ public class JSONPlayer {
 	//Time
 	public string time;
 
+	//KillCounter
+	public int kill_counter;
+
 	//Garbage needed to make serializer work
 	string user_name;
 
@@ -52,6 +55,8 @@ public class JSONPlayer {
 		defence = player.currentDefense;
 		item_list = player.itemList;
 		next_level = player.nextLevel;
+		kill_counter = player.killCounter;
+		//add score or something
 
 		int remainder;
 		float total_time = APIActions.time + Time.time;
@@ -70,6 +75,8 @@ public class JSONPlayer {
 		player.SetDefense (defence);
 		player.SetNextLevel (next_level);
 		player.SetItemList (item_list);
+		//Set methods to player from save sufff
+		player.SetKillCounter(kill_counter);
 	}
 
 	public string ToJSON() {
@@ -94,6 +101,7 @@ public class APIActions : MonoBehaviour {
 		loginInfo.AddField ("password", password);
 
 		UnityWebRequest request = UnityWebRequest.Post (url, loginInfo);
+		request.SetRequestHeader ("topsecret", "Mcjdan,dryd.ugjtgo.oekrpat!");
 	
 
 		request.Send ();
@@ -148,6 +156,7 @@ public class APIActions : MonoBehaviour {
 		userInfo.AddField ("password", password);
 
 		UnityWebRequest request = UnityWebRequest.Post (url, userInfo);
+		request.SetRequestHeader ("topsecret", "Mcjdan,dryd.ugjtgo.oekrpat!");
 
 
 		request.Send ();
@@ -207,6 +216,7 @@ public class APIActions : MonoBehaviour {
         UnityWebRequest request = UnityWebRequest.Post(url, body);
 		request.SetRequestHeader ("Authorization", string.Concat ("Token ", token));
         request.SetRequestHeader("Content-Type", "application/json");
+		request.SetRequestHeader ("topsecret", "Mcjdan,dryd.ugjtgo.oekrpat!");
         request.uploadHandler = uh;
 
 
@@ -261,6 +271,7 @@ public class APIActions : MonoBehaviour {
 		UnityWebRequest request = UnityWebRequest.Get(url);
 		request.SetRequestHeader ("Authorization", string.Concat ("Token ", token));
 		request.SetRequestHeader("Content-Type", "application/json");
+		request.SetRequestHeader ("topsecret", "Mcjdan,dryd.ugjtgo.oekrpat!");
 
 
 		request.Send();
@@ -307,6 +318,7 @@ public class APIActions : MonoBehaviour {
 				player.SetSpeed (Player.defaultSpeed);
 				player.SetDefense (Player.defaultDefense);
 				player.SetNextLevel (1);
+				player.SetKillCounter (0);
 				result = true;
 			}
 		} else {
