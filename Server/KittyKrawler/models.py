@@ -23,6 +23,7 @@ class GameSave(models.Model):
     total_health = models.IntegerField(null=True)
     next_level = models.IntegerField(null=True)
     time = models.DurationField(null=True)
+    kill_counter = models.IntegerField(null=True)
 
 class Leaderboard(models.Model):
     user = models.ForeignKey(User)

@@ -6,11 +6,12 @@ from rest_framework.response import Response
 from rest_framework import permissions, status
 
 from rest_framework import viewsets
+from .permissions import IsAdminOrClient
 
 class SaveView(viewsets.ModelViewSet):
     queryset = GameSave.objects.all()
     serializer_class = SaveSerializer
-    permission_classes = (permissions.IsAuthenticated,)
+    permission_classes = (IsAdminOrClient,)
 
     def perform_create(self, serializer):
         saves = GameSave.objects.filter(user=self.request.user, current=True)

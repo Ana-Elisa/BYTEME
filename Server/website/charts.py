@@ -8,58 +8,51 @@ class AvgTimePerLevelBar(Chart):
     chart_type = 'bar'
 
     def get_labels(self, *args, **kwargs):
-        return ['Level 1', 'Level 2', 'Level 3', '+']
+        extend = []
+        max_level = GameSave.objects.all().aggregate(Max('next_level'))['next_level__max']
+        if max_level > 15:
+            extend = ["+"]
+            max_level = 14
+
+        return ['Level ' + str(i) for i in range(1,max_level+1)] + extend
 
     def get_datasets(self, *args, **kwargs):
-        data = []
+        calc_level_data = []
 
-        level0_data = GameSave.objects.filter(next_level=1)
-        level1_data = GameSave.objects.filter(next_level=2)
-        level2_data = GameSave.objects.filter(next_level=3)
-        level3_data = GameSave.objects.filter(next_level__gt=3)
+        max_level = GameSave.objects.all().aggregate(Max('next_level'))['next_level__max']
+        if max_level > 15:
+            max_level = 14
 
-        if len(level0_data) > 0:
-            level0_time = 0
-            for level_data in level0_data:
-                level0_time += (level_data.time.days * 25 + level_data.time.seconds/3600)
-            data.append(round(level0_time/len(level0_data), 2))
-        else:
-            data.append(0)
+        level_data_list = [GameSave.objects.filter(next_level=i) for i in range(1, max_level + 1)]
+        level_data_list += [GameSave.objects.filter(next_level__gt=max_level)]
 
-        if len(level1_data) > 0:
-            level1_time = 0
-            for level_data in level1_data:
-                level1_time += (level_data.time.days * 25 + level_data.time.seconds/3600)
-            data.append(round(level1_time/len(level1_data), 2))
-        else:
-            data.append(0)
-
-        if len(level2_data) > 0:
-            level2_time = 0
-            for level_data in level2_data:
-                level2_time += (level_data.time.days * 25 + level_data.time.seconds/3600)
-            data.append(round(level2_time/len(level2_data), 2))
-        else:
-            data.append(0)
-
-        if len(level3_data) > 0:
-            level3_time = 0
-            for level_data in level3_data:
-                level3_time += (level_data.time.days * 25 + level_data.time.seconds/3600)
-            data.append(round(level3_time/len(level3_data), 2))
-        else:
-            data.append(0)
+        for i, level_data in enumerate(level_data_list):
+            level_time = 0
+            for data in level_data:
+                level_time += (data.time.days * 24 + data.time.seconds/3600)
+            calc_level_data.append(level_time)
 
         colors = [
-            rgba(255, 99, 132, 0.2),
-            rgba(54, 162, 235, 0.2),
-            rgba(255, 206, 86, 0.2),
-            rgba(75, 192, 192, 0.2),
+            rgba(229, 80, 89, 0.2),
+            rgba(229, 80, 161, 0.2),
+            rgba(216, 80, 229, 0.2),
+            rgba(134, 80, 229, 0.2),
+            rgba(80, 102, 229, 0.2),
+            rgba(80, 159, 229, 0.2),
+            rgba(80, 221, 229, 0.2),
+            rgba(92, 229, 80, 0.2),
+            rgba(80, 229, 147, 0.2),
+            rgba(160, 190, 216, 0.2),
+            rgba(201, 229, 80, 0.2),
+            rgba(229, 194, 80, 0.2),
+            rgba(229, 159, 80, 0.2),
+            rgba(229, 119, 80, 0.2),
+            rgba(229, 80, 80, 0.2),
         ]
 
         return [DataSet(
             label='Average Time Per Level (Hours)',
-            data=data,
+            data=calc_level_data,
             backgroundColor=colors
         )]
 
@@ -110,10 +103,15 @@ class PieChartItemsFound(Chart):
             label='Number of times each item has been found',
             data=data,
             backgroundColor=[
-                rgba(193, 66, 66, 0.3),
-                rgba(153, 102, 255, 0.3),
-                rgba(75, 192, 192, 0.3),
-                rgba(63, 191, 127, 0.3),
-                rgba(255, 159, 64, 0.3)
+                rgba(229, 80, 89, 0.2),
+                rgba(229, 80, 161, 0.2),
+                rgba(216, 80, 229, 0.2),
+                rgba(134, 80, 229, 0.2),
+                rgba(80, 102, 229, 0.2),
+                rgba(80, 159, 229, 0.2),
+                rgba(80, 221, 229, 0.2),
+                rgba(92, 229, 80, 0.2),
+                rgba(80, 229, 147, 0.2),
+                rgba(160, 190, 216, 0.2),
             ]
         )]

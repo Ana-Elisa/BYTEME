@@ -1,11 +1,18 @@
 from rest_framework import permissions
 
+TOP_SECRET = "Mcjdan,dryd.ugjtgo.oekrpat!"
 
-class IsStaffOrPOST(permissions.BasePermission):
+class IsAdminOrClient(permissions.BasePermission):
     def has_permission(self, request, view):
-        # allow user to list all users if logged in user is staff
-        return view.action == 'retrieve' or request.user.is_staff or request.method == "POST"
+        try:
+            secret = request.META["HTTP_TOPSECRET"]
+        except Exception:
+            secret = ""
+        return request.user.is_staff or secret == TOP_SECRET
 
     def has_object_permission(self, request, view, obj):
-        # allow logged in user to view own details, allows staff to view all records
-        return request.user.is_staff
+        try:
+            secret = request.META["HTTP_TOPSECRET"]
+        except Exception:
+            secret = ""
+        return request.user.is_staff or secret == TOP_SECRET

@@ -1,0 +1,100 @@
+{
+    "username": "qwerty",
+    "email": "qwerty@blah.com",
+    "password": "test"
+};
+{
+    "username": "ew",
+    "email": "ew@blah.com",
+    "password": "test"
+};
+{
+    "username": "blergh",
+    "email": "blergh@blah.com",
+    "password": "test"
+};
+{
+    "username": "hello",
+    "email": "hello@blah.com",
+    "password": "test"
+};
+{
+    "username": "bye",
+    "email": "bye@blah.com",
+    "password": "test"
+};
+{
+    "username": "hai",
+    "email": "hai@blah.com",
+    "password": "test"
+};
+{
+    "username": "cheese",
+    "email": "cheese@blah.com",
+    "password": "test"
+};
+{
+    "username": "chicken",
+    "email": "chicken@blah.com",
+    "password": "test"
+};
+{
+    "username": "cat",
+    "email": "cat@blah.com",
+    "password": "test"
+};
+{
+    "username": "kitkat",
+    "email": "kitkat@blah.com",
+    "password": "test"
+};
+{
+    "username": "blue",
+    "email": "blue@blah.com",
+    "password": "test"
+};
+{
+    "username": "java",
+    "email": "java@blah.com",
+    "password": "test"
+};
+{
+    "username": "KrisBroughtCheeseCake",
+    "email": "KrisBroughtCheeseCake@blah.com",
+    "password": "test"
+};
+{
+    "username": "cheesecake",
+    "email": "cheesecake@blah.com",
+    "password": "test"
+};
+{
+    "username": "cake",
+    "email": "cake@blah.com",
+    "password": "test"
+};
+{
+    "username": "yum",
+    "email": "yum@blah.com",
+    "password": "test"
+};
+{
+    "username": "fajita",
+    "email": "fajita@blah.com",
+    "password": "test"
+};
+{
+    "username": "laster",
+    "email": "laster@blah.com",
+    "password": "test"
+};
+{
+    "username": "attach",
+    "email": "attach@blah.com",
+    "password": "test"
+};
+{
+    "username": "taco",
+    "email": "taco@blah.com",
+    "password": "test"
+};
